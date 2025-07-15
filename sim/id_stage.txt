@@ -1,0 +1,5 @@
+rtl/id_stage_pip.v
+rtl/registers.v
+rtl/instr_decoder.v
+rtl/control_unit.v
+rtl/id_ex_reg.v

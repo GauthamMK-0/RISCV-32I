@@ -1,0 +1,5 @@
+rtl/ex_stage_pip.v
+rtl/alu.v
+rtl/jump_unit.v
+rtl/branch_unit.v
+rtl/ex_mem_reg.v

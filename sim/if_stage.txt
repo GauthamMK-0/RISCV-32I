@@ -1,0 +1,5 @@
+rtl/if_stage_pip.v
+rtl/instr_mem.v
+rtl/pc.v
+rtl/pc_logic.v
+rtl/if_id_reg.v

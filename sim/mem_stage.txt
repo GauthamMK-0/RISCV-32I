@@ -1,0 +1,5 @@
+rtl/mem_stage_pip.v
+rtl/data_mem.v
+rtl/byte_logic.v
+rtl/mem_wb_reg.v
+rtl/mem_mux.v
