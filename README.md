@@ -1,54 +1,25 @@
-register:
-- asynchronous reset, less logic required to implement,but need to make sure passes recovery and removal time 
-- for ASIC,active low reset
+Introduction:
+This repository contains the RTL implementation of a 5-stage pipelined RV32I processor core with hazard handling and data forearding for efficient instruction execution using Verilog. This core supports all the instructions of the 32-bit Base Integer Instruction Set. RISC-V is an open-source Instruction Set Architecture (ISA), unlike existing proprietary ISAs such as ARM and x86. It follows the RISC principles and employs a load-store architecture with 32 general-purpose registers. RISC-V defines a minimal base integer instruction set, with optional standard extensions that provide full flexibility to customize the architecture for a wide range of applications.
 
-ALU:
-- LUI, AUIPC needs to be implemented in design 
-- need separate signal for LUI for execution 
+Tools and Workspace:
+Development Environment - Windows 11 + WSL2 (Ubuntu-24.04)
+Code Editor - VScode + Remote-WSL extension
+Simulator - Verilator 
+Waveform Viewer - GTKWave + VcXsrv
 
-Branch Unit:
-- look into the updation of pc logic ✅
-- need to implement both branch and branch_flag ✅
-
-Instruction decoder:
-- implement U-type later ✅
-
-Jump logic:
-- need implementation of jump logic  ========> PRIORITY! ✅
-- implement jump = jal| jalr later in the pipeline
-
-Control unit:
-- alu_src = 0 => rs2, alu_src = 1 => imm ✅
-
-EX_stage:
-- need implementation of forwarding unit ✅
-- need multiplexer for alu from frowarding unit
-- remove unwanted wires in register  (needed pc for wb stage)
-
-MEM_stage:
-- need to implement memory access mux ✅
-- need to implement byte masking ✅
-
-
-THINGS TO DO AND LEARN:
-- learn about stalling in pipelines
-- implementation of separate flush signals
-- try using RISC-V NOP instruction ADDI x0, x0, 0
--remove mem_to_reg signal (replaced by wb_sel)
-
-POINTS TO REMEBER:
-- jump and branch instructions are handled in EX satge
-- refer commenting style from mem_mux.v
-
-PROGRESS:
-- IF_stage completed and checked
-- ID_stage completed and checked
-- EX_stage completed and checked
-- MEM_stage completed and checked
-- WB_stage completed and checked
-
-
-
-THINGS TO CHECK:
-- sub instr fails 
-- check logical instructions
+Pipeline Architecture:
+- IF stage:
+       The instruction is feteched from the instruction memory based on the current Program Counter (PC).
+   Workflow:
+   - Reads instruction at PC
+   - Computes next PC = PC +4 
+   - Handles jump and branch instructions by redirecting to target address
+   - IF/ID pipeline register forwards the output to ID stage
+- ID stage:
+      Decoding of the retrieved instruction for IF stage and generation of control signals for EX stage.
+  Workflow:
+  - Generates rs1, rs2, imm, funt3, funt7 fields and control signals
+  - Read data from the general purpose registers
+  - ID/EX pipeline register fowards the output to EX stage
+- EX stage:
+      
