@@ -1,13 +1,13 @@
-##Introduction:
+## Introduction:
 This repository contains the RTL implementation of a **5-stage pipelined RV32I processor core** with hazard handling and data forearding for efficient instruction execution using Verilog. This core supports all the instructions of the 32-bit Base Integer Instruction Set. **RISC-V** is an open-source Instruction Set Architecture (ISA), unlike existing proprietary ISAs such as ARM and x86. It follows the **RISC** principles and employs a **load-store architecture** with 32 general-purpose registers. RISC-V defines a minimal base integer instruction set, with optional standard extensions that provide full flexibility to customize the architecture for a wide range of applications.
 
-##Tools and Workspace:
+## Tools and Workspace:
 Development Environment - Windows 11 + WSL2 (Ubuntu-24.04)
 Code Editor - VScode + Remote-WSL extension
 Simulator - Verilator 
 Waveform Viewer - GTKWave + VcXsrv
 
-##Pipeline Architecture:
+## Pipeline Architecture:
 - **IF stage**:
        The instruction is feteched from the instruction memory based on the current Program Counter (PC).
    #Workflow:
