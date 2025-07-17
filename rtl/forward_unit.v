@@ -1,3 +1,6 @@
+// Description: Forwarding unit 
+// forwards data form later stages to previous stages
+
 module forward_unit (
     input wire [4:0] ex_rs1,
     input wire [4:0] ex_rs2,
