@@ -1,3 +1,5 @@
+// Description: Instruction memory
+
 module instr_mem (
     input wire [31:0] addr,
     output wire [31:0] instr
@@ -6,8 +8,9 @@ module instr_mem (
 
 reg [31:0] memory [0:255]; // 1KB instruction memory (32-bit)
 
-// Initialize the instruction memory with some instructions
+// Load instructions manually or use .hex files
 initial begin
+    // For testing only
     // I-type (Immediate ALU operations)
     memory[0]  = 32'h00100093; // addi x1, x0, 1
     memory[1]  = 32'h00200113; // addi x2, x0, 2
