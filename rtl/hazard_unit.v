@@ -1,4 +1,8 @@
-    module hazard_unit (
+// Description: Hazard handling unt
+// Handles Load data hazards and Control hazard
+
+
+module hazard_unit (
         input wire [4:0] id_rs1,
         input wire [4:0] id_rs2,
         input wire [4:0] ex_rd,
@@ -14,12 +18,16 @@
     );
 
     wire load_hazard;
-    assign load_hazard = ex_mem_read && (id_rs1 == ex_rd || id_rs2 == ex_rd) && ex_rd != 5'b0;
+    assign load_hazard = ex_mem_read && (id_rs1 == ex_rd || id_rs2 == ex_rd) && ex_rd != 5'b0;  // load hazard logic
+
+    // load hazard handling
     assign pc_write = !load_hazard;
     assign if_id_write = !load_hazard;
     assign id_ex_write = !load_hazard;
-    assign if_id_flush = branch_taken || jump;
-    assign id_ex_flush = branch_taken || jump;
+    
+    // control hazard handling 
+    assign if_id_flush = branch_taken || jump;   
+    assign id_ex_flush = branch_taken || jump;   
 
     
     endmodule
