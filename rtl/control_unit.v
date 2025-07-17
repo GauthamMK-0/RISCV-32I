@@ -1,10 +1,13 @@
+// Description: Control unit of RV32I to decode instructions and generate control signals
+// Handles control signals for all supported instructions in Base Integer Set
+
 module control_unit (
     input wire [6:0] opcode,
     input wire [2:0] funct3,
     input wire [6:0] funct7,
     output reg [3:0] alu_ctrl,
     output reg [2:0] branch_ctrl,
-    output reg [1:0] wb_sel,
+    output reg [1:0] wb_sel,        //multiplexer signal to determine type to data written in WB-stage
     output reg reg_write,
     output reg mem_read,
     output reg mem_write,
@@ -26,8 +29,8 @@ localparam SRL = 4'b0110;
 localparam SRA = 4'b0111;
 localparam SLT = 4'b1000;
 localparam SLTU = 4'b1001;
-localparam PASS = 4'b1010;
-localparam ADD_PC = 4'b1011;
+localparam PASS = 4'b1010;    // for LUI to pass 32-bit immediate
+localparam ADD_PC = 4'b1011;  // for AUIPC to pass PC + 4
 
 localparam BEQ = 3'b000;  // Branch if equal
 localparam BNE = 3'b001;  // Branch if not equal
@@ -185,5 +188,3 @@ always @(*) begin
 
     
 endmodule
-
-//need a signal for IUPAC to use pc 
