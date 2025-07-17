@@ -1,3 +1,5 @@
+// Description: ID/EX pipeline register
+
 module id_ex_reg (
     input wire clk,
     input wire rst,
