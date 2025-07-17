@@ -11,7 +11,7 @@ This repository contains the RTL implementation of a **5-stage pipelined RV32I p
 
 ## Pipeline Architecture
 - **IF stage:**
-       The instruction is feteched from the instruction memory based on the current Program Counter (**PC**).
+       The instruction is fetched from the instruction memory based on the current Program Counter (**PC**).
   
     **Workflow:**
    - Reads instruction at **PC**
@@ -23,10 +23,10 @@ This repository contains the RTL implementation of a **5-stage pipelined RV32I p
       Decoding of the retrieved instruction for **IF** stage and generation of control signals for **EX** stage.
   
   **Workflow:**
-  - Generates `rs1`, `rs2`, `imm`, `funt3`, `funt7` fields and control signals
+  - Generates `rs1`, `rs2`, `imm`, `funct3`, `funct7` fields and control signals
   - Read data from the general purpose registers
   - Based on forwarding, data from **EX** or **MEM** stage is forwarded to next stage
-  - **ID/EX** pipeline register fowards decoded fields and control signals to **EX** stage
+  - **ID/EX** pipeline register forwards decoded fields and control signals to **EX** stage
     
 - **EX stage:**
       Execution of arthimetic, logical, condition checks or address calculations.
@@ -51,8 +51,10 @@ This repository contains the RTL implementation of a **5-stage pipelined RV32I p
   **Workflow:**
   - Computes **PC + 4** for `JAL` and `JALR` instructions
   - Based on the `wb_sel`, selects:
-    - ALU result (Arithmetic/Logical inatructions)
+    - ALU result (Arithmetic/Logical instructions)
     - Memory data (Load instructions)
     - **PC + 4**  (Jump instructions)
-  - Writes the data to destination address in the register file
-      
+  - Writes the data to destination register in the register file
+
+## Forwarding and Hazard handling
+
