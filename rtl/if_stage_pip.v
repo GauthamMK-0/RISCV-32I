@@ -1,3 +1,5 @@
+// Description: IF-stage pipeline initialization
+
 module if_stage_pip (
     input wire clk,
     input wire rst,
