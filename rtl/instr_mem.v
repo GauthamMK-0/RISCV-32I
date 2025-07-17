@@ -41,10 +41,6 @@ initial begin
     
 end
 
-
-
-
-
-assign instr = memory[addr[9:2]]; // Assuming 4-byte aligned addresses
+assign instr = memory[addr[9:2]]; // 4-byte aligned addresses
     
 endmodule
