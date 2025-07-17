@@ -1,3 +1,5 @@
+// Description: EX-stage pipeline initialization
+
 module ex_stage_pip (
     input wire clk,
     input wire rst,
@@ -44,7 +46,7 @@ module ex_stage_pip (
     output wire branch_taken_out,
     output wire jump_out,
 
-    //debug
+    //debug signals
     output wire [31:0] alu_a_debug, 
     output wire [31:0] alu_b_debug,
     output wire [3:0] alu_ctrl_debug
@@ -69,6 +71,7 @@ assign rs2_data = (forward_rs2 == 2'b00) ? rs2_data_in:
 assign alu_A = (alu_ctrl_in == 4'b1011) ? pc_in : rs1_data;
 assign alu_B = alu_src_in ? imm_in : rs2_data; // select between immediate or rs2 data
 
+// assignments for debugging
 assign alu_a_debug = alu_A;
 assign alu_b_debug = alu_B;
 assign alu_ctrl_debug = alu_ctrl_in;
