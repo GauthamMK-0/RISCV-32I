@@ -8,35 +8,33 @@ reg [31:0] memory [0:255]; // 1KB instruction memory (32-bit)
 
 // Initialize the instruction memory with some instructions
 initial begin
-    // I-type (Immediate ALU operations)
-    memory[0]  = 32'h00100093; // addi x1, x0, 1
-    memory[1]  = 32'h00200113; // addi x2, x0, 2
-    memory[2]  = 32'h00300193; // addi x3, x0, 3
-    memory[3]  = 32'h00400213; // addi x4, x0, 4
+    memory[0]  = 32'h00000093; // addi x1, x0, 0      ; x1 = 0
+    memory[1]  = 32'h00500113; // addi x2, x0, 5      ; x2 = 5
+    memory[2]  = 32'h00a00193; // addi x3, x0, 10     ; x3 = 10
+    memory[3]  = 32'h00218333; // add x6, x3, x2      ; x6 = 10 + 5 = 15
 
-    // R-type (ALU operations)
-    memory[4]  = 32'h002082b3; // add x5, x1, x2
-    memory[5]  = 32'h40228333; // sub x6, x5, x2
-    memory[6]  = 32'h0042f3b3; // and x7, x5, x4
-    memory[7]  = 32'h0052e433; // or  x8, x5, x5
-    memory[8]  = 32'h0062c4b3; // xor x9, x5, x6
-    memory[9]  = 32'h00729433; // sll x10, x5, x7
-    memory[10] = 32'h0082d4b3; // srl x9, x5, x8
-    memory[11] = 32'h40a2d533; // sra x10, x5, x10
-    memory[12] = 32'h00b2a5b3; // slt x11, x5, x11
-    memory[13] = 32'h00c2b633; // sltu x12, x5, x12
+    // ---------- Forwarding Test ----------
+    memory[4]  = 32'h006282b3; // add x5, x5, x6      ; x5 += x6 → should forward x6 (EX hazard)
+    memory[5]  = 32'h0062a2b3; // add x5, x5, x6      ; x5 += x6 → should forward x6 (MEM hazard)
 
-    // I-type (Immediate logic and shifts)
-    memory[14] = 32'h0010a693; // slti x13, x1, 1
-    memory[15] = 32'h0010b713; // sltiu x14, x1, 1
-    memory[16] = 32'h0010c793; // xori x15, x1, 1
-    memory[17] = 32'h0010d813; // ori x16, x1, 1
-    memory[18] = 32'h0010e893; // andi x17, x1, 1
-    memory[19] = 32'h00109613; // slli x18, x1, 1
-    memory[20] = 32'h0010d693; // srli x13, x1, 1
-    memory[21] = 32'h4010d713; // srai x14, x1, 1
-    
+    // ---------- Jump Test ----------
+    memory[6]  = 32'h004000ef; // jal x1, 4           ; jump to PC+4+4 = PC+8 = instr[8], x1 = PC+4
+
+    memory[7]  = 32'h00000013; // nop                ; should be skipped due to jump
+    memory[8]  = 32'h00108093; // addi x1, x1, 1      ; x1 = x1 + 1
+
+    // ---------- Branch Test (BEQ taken) ----------
+    memory[9]  = 32'h00310063; // beq x2, x3, +6      ; x2 = 5, x3 = 10 → not equal → skip
+    memory[10] = 32'h00c00093; // addi x1, x0, 12     ; skipped if branch taken
+
+    // Update x3 = 5 (match x2)
+    memory[11] = 32'h00500193; // addi x3, x0, 5      ; x3 = 5
+    memory[12] = 32'h00319063; // beq x2, x3, +6      ; x2 = 5, x3 = 5 → branch taken, skip next
+
+    memory[13] = 32'h00d00093; // addi x1, x0, 13     ; skipped if branch taken
+    memory[14] = 32'h00100113; // addi x2, x0, 1      ; executed regardless
 end
+
 
 
 

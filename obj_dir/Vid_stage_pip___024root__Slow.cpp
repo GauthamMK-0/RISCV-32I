@@ -26,6 +26,8 @@ constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT_
 constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__SRA;
 constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__SLT;
 constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__SLTU;
+constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__PASS;
+constexpr CData/*3:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__ADD_PC;
 constexpr CData/*2:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__BEQ;
 constexpr CData/*2:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__BNE;
 constexpr CData/*2:0*/ Vid_stage_pip___024root::id_stage_pip__DOT__control__DOT__BLT;

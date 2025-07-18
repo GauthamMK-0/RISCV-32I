@@ -18,11 +18,13 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
     struct {
         VL_IN8(clk,0,0);
         VL_IN8(rst,0,0);
+        VL_IN8(funct3_in,2,0);
         VL_IN8(rs1_in,4,0);
         VL_IN8(rs2_in,4,0);
         VL_IN8(rd_in,4,0);
         VL_IN8(alu_ctrl_in,3,0);
         VL_IN8(branch_ctrl_in,2,0);
+        VL_IN8(wb_sel_in,1,0);
         VL_IN8(reg_write_in,0,0);
         VL_IN8(mem_read_in,0,0);
         VL_IN8(mem_write_in,0,0);
@@ -33,22 +35,27 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         VL_IN8(jalr_in,0,0);
         VL_IN8(forward_rs1,1,0);
         VL_IN8(forward_rs2,1,0);
+        VL_OUT8(funct3_out,2,0);
         VL_OUT8(rd_out,4,0);
         VL_OUT8(rs1_out,4,0);
         VL_OUT8(rs2_out,4,0);
+        VL_OUT8(wb_sel_out,1,0);
         VL_OUT8(mem_read_out,0,0);
         VL_OUT8(mem_write_out,0,0);
         VL_OUT8(reg_write_out,0,0);
         VL_OUT8(mem_to_reg_out,0,0);
         VL_OUT8(branch_taken_out,0,0);
         VL_OUT8(jump_out,0,0);
+        VL_OUT8(alu_ctrl_debug,3,0);
         CData/*0:0*/ ex_stage_pip__DOT__clk;
         CData/*0:0*/ ex_stage_pip__DOT__rst;
+        CData/*2:0*/ ex_stage_pip__DOT__funct3_in;
         CData/*4:0*/ ex_stage_pip__DOT__rs1_in;
         CData/*4:0*/ ex_stage_pip__DOT__rs2_in;
         CData/*4:0*/ ex_stage_pip__DOT__rd_in;
         CData/*3:0*/ ex_stage_pip__DOT__alu_ctrl_in;
         CData/*2:0*/ ex_stage_pip__DOT__branch_ctrl_in;
+        CData/*1:0*/ ex_stage_pip__DOT__wb_sel_in;
         CData/*0:0*/ ex_stage_pip__DOT__reg_write_in;
         CData/*0:0*/ ex_stage_pip__DOT__mem_read_in;
         CData/*0:0*/ ex_stage_pip__DOT__mem_write_in;
@@ -59,17 +66,22 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         CData/*0:0*/ ex_stage_pip__DOT__jalr_in;
         CData/*1:0*/ ex_stage_pip__DOT__forward_rs1;
         CData/*1:0*/ ex_stage_pip__DOT__forward_rs2;
+        CData/*2:0*/ ex_stage_pip__DOT__funct3_out;
         CData/*4:0*/ ex_stage_pip__DOT__rd_out;
         CData/*4:0*/ ex_stage_pip__DOT__rs1_out;
         CData/*4:0*/ ex_stage_pip__DOT__rs2_out;
+        CData/*1:0*/ ex_stage_pip__DOT__wb_sel_out;
         CData/*0:0*/ ex_stage_pip__DOT__mem_read_out;
         CData/*0:0*/ ex_stage_pip__DOT__mem_write_out;
         CData/*0:0*/ ex_stage_pip__DOT__reg_write_out;
         CData/*0:0*/ ex_stage_pip__DOT__mem_to_reg_out;
         CData/*0:0*/ ex_stage_pip__DOT__branch_taken_out;
         CData/*0:0*/ ex_stage_pip__DOT__jump_out;
+        CData/*3:0*/ ex_stage_pip__DOT__alu_ctrl_debug;
         CData/*0:0*/ ex_stage_pip__DOT__zero_flag;
         CData/*0:0*/ ex_stage_pip__DOT__branch_taken;
+    };
+    struct {
         CData/*0:0*/ ex_stage_pip__DOT__jump;
         CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__alu_ctrl;
         CData/*0:0*/ ex_stage_pip__DOT__alu_unit__DOT__zero_flag;
@@ -80,22 +92,24 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         CData/*0:0*/ ex_stage_pip__DOT__jmp_unit__DOT__jal;
         CData/*0:0*/ ex_stage_pip__DOT__jmp_unit__DOT__jalr;
         CData/*0:0*/ ex_stage_pip__DOT__jmp_unit__DOT__jump;
-    };
-    struct {
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__clk;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__rst;
+        CData/*2:0*/ ex_stage_pip__DOT__exmem_register__DOT__funct3_in;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rd_in;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rs1_in;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rs2_in;
+        CData/*1:0*/ ex_stage_pip__DOT__exmem_register__DOT__wb_sel_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__mem_read_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__mem_write_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__reg_write_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__mem_to_reg_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__branch_taken_in;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__jump_in;
+        CData/*2:0*/ ex_stage_pip__DOT__exmem_register__DOT__funct3_out;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rs1_out;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rs2_out;
         CData/*4:0*/ ex_stage_pip__DOT__exmem_register__DOT__rd_out;
+        CData/*1:0*/ ex_stage_pip__DOT__exmem_register__DOT__wb_sel_out;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__mem_read_out;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__mem_write_out;
         CData/*0:0*/ ex_stage_pip__DOT__exmem_register__DOT__reg_write_out;
@@ -118,6 +132,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         VL_OUT(rs2_data_out,31,0);
         VL_OUT(branch_target_out,31,0);
         VL_OUT(jump_target_out,31,0);
+        VL_OUT(alu_a_debug,31,0);
+        VL_OUT(alu_b_debug,31,0);
         IData/*31:0*/ ex_stage_pip__DOT__pc_in;
         IData/*31:0*/ ex_stage_pip__DOT__rs1_data_in;
         IData/*31:0*/ ex_stage_pip__DOT__rs2_data_in;
@@ -129,6 +145,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         IData/*31:0*/ ex_stage_pip__DOT__rs2_data_out;
         IData/*31:0*/ ex_stage_pip__DOT__branch_target_out;
         IData/*31:0*/ ex_stage_pip__DOT__jump_target_out;
+        IData/*31:0*/ ex_stage_pip__DOT__alu_a_debug;
+    };
+    struct {
+        IData/*31:0*/ ex_stage_pip__DOT__alu_b_debug;
         IData/*31:0*/ ex_stage_pip__DOT__rs1_data;
         IData/*31:0*/ ex_stage_pip__DOT__rs2_data;
         IData/*31:0*/ ex_stage_pip__DOT__alu_A;
@@ -146,8 +166,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
         IData/*31:0*/ ex_stage_pip__DOT__brch_unit__DOT__branch_target;
         IData/*31:0*/ ex_stage_pip__DOT__jmp_unit__DOT__pc;
         IData/*31:0*/ ex_stage_pip__DOT__jmp_unit__DOT__rs1_data;
-    };
-    struct {
         IData/*31:0*/ ex_stage_pip__DOT__jmp_unit__DOT__imm;
         IData/*31:0*/ ex_stage_pip__DOT__jmp_unit__DOT__jump_target;
         IData/*31:0*/ ex_stage_pip__DOT__exmem_register__DOT__pc_in;
@@ -181,6 +199,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip___024root final : public Verila
     static constexpr CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__SRA = 7U;
     static constexpr CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__SLT = 8U;
     static constexpr CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__SLTU = 9U;
+    static constexpr CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__PASS = 0x0aU;
+    static constexpr CData/*3:0*/ ex_stage_pip__DOT__alu_unit__DOT__ADD_PC = 0x0bU;
     static constexpr CData/*2:0*/ ex_stage_pip__DOT__brch_unit__DOT__BEQ = 0U;
     static constexpr CData/*2:0*/ ex_stage_pip__DOT__brch_unit__DOT__BNE = 1U;
     static constexpr CData/*2:0*/ ex_stage_pip__DOT__brch_unit__DOT__BLT = 2U;

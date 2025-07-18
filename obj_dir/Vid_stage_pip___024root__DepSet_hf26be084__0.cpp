@@ -34,8 +34,8 @@ void Vid_stage_pip___024root___eval_triggers__act(Vid_stage_pip___024root* vlSel
     // Body
     vlSelfRef.__VactTriggered.setBit(0U, ((IData)(vlSelfRef.clk) 
                                           & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__clk__0))));
-    vlSelfRef.__VactTriggered.setBit(1U, ((~ (IData)(vlSelfRef.rst)) 
-                                          & (IData)(vlSelfRef.__Vtrigprevexpr___TOP__rst__0)));
+    vlSelfRef.__VactTriggered.setBit(1U, ((IData)(vlSelfRef.rst) 
+                                          & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__rst__0))));
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
     vlSelfRef.__Vtrigprevexpr___TOP__rst__0 = vlSelfRef.rst;
 #ifdef VL_DEBUG

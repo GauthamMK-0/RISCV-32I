@@ -130,7 +130,7 @@ VL_ATTR_COLD void Vid_stage_pip___024root___dump_triggers__act(Vid_stage_pip___0
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(negedge rst)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge rst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -148,7 +148,7 @@ VL_ATTR_COLD void Vid_stage_pip___024root___dump_triggers__nba(Vid_stage_pip___0
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(negedge rst)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge rst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -167,17 +167,28 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->reg_write_wb = VL_RAND_RESET_I(1);
     vlSelf->rd_wb = VL_RAND_RESET_I(5);
     vlSelf->rd_data_wb = VL_RAND_RESET_I(32);
+    vlSelf->ex_alu_result = VL_RAND_RESET_I(32);
+    vlSelf->mem_alu_result = VL_RAND_RESET_I(32);
+    vlSelf->ex_rd = VL_RAND_RESET_I(5);
+    vlSelf->mem_rd = VL_RAND_RESET_I(5);
+    vlSelf->ex_reg_write = VL_RAND_RESET_I(1);
+    vlSelf->mem_reg_write = VL_RAND_RESET_I(1);
+    vlSelf->forward_rs1 = VL_RAND_RESET_I(2);
+    vlSelf->forward_rs2 = VL_RAND_RESET_I(2);
     vlSelf->rs1_hzd = VL_RAND_RESET_I(5);
     vlSelf->rs2_hzd = VL_RAND_RESET_I(5);
     vlSelf->rd_hzd = VL_RAND_RESET_I(5);
     vlSelf->rs1_out = VL_RAND_RESET_I(5);
     vlSelf->rs2_out = VL_RAND_RESET_I(5);
     vlSelf->rd_out = VL_RAND_RESET_I(5);
+    vlSelf->pc_out = VL_RAND_RESET_I(32);
     vlSelf->rs1_data_out = VL_RAND_RESET_I(32);
     vlSelf->rs2_data_out = VL_RAND_RESET_I(32);
     vlSelf->imm_out = VL_RAND_RESET_I(32);
+    vlSelf->funct3_out = VL_RAND_RESET_I(3);
     vlSelf->alu_ctrl_out = VL_RAND_RESET_I(4);
     vlSelf->branch_ctrl_out = VL_RAND_RESET_I(3);
+    vlSelf->wb_sel_out = VL_RAND_RESET_I(2);
     vlSelf->reg_write_out = VL_RAND_RESET_I(1);
     vlSelf->mem_read_out = VL_RAND_RESET_I(1);
     vlSelf->mem_write_out = VL_RAND_RESET_I(1);
@@ -195,17 +206,28 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__reg_write_wb = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__rd_wb = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rd_data_wb = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__ex_alu_result = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__mem_alu_result = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__ex_rd = VL_RAND_RESET_I(5);
+    vlSelf->id_stage_pip__DOT__mem_rd = VL_RAND_RESET_I(5);
+    vlSelf->id_stage_pip__DOT__ex_reg_write = VL_RAND_RESET_I(1);
+    vlSelf->id_stage_pip__DOT__mem_reg_write = VL_RAND_RESET_I(1);
+    vlSelf->id_stage_pip__DOT__forward_rs1 = VL_RAND_RESET_I(2);
+    vlSelf->id_stage_pip__DOT__forward_rs2 = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__rs1_hzd = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rs2_hzd = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rd_hzd = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rs1_out = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rs2_out = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__rd_out = VL_RAND_RESET_I(5);
+    vlSelf->id_stage_pip__DOT__pc_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__rs1_data_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__rs2_data_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__imm_out = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__funct3_out = VL_RAND_RESET_I(3);
     vlSelf->id_stage_pip__DOT__alu_ctrl_out = VL_RAND_RESET_I(4);
     vlSelf->id_stage_pip__DOT__branch_ctrl_out = VL_RAND_RESET_I(3);
+    vlSelf->id_stage_pip__DOT__wb_sel_out = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__reg_write_out = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__mem_read_out = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__mem_write_out = VL_RAND_RESET_I(1);
@@ -225,6 +247,7 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__rs2_data = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__alu_ctrl = VL_RAND_RESET_I(4);
     vlSelf->id_stage_pip__DOT__branch_ctrl = VL_RAND_RESET_I(3);
+    vlSelf->id_stage_pip__DOT__wb_sel = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__reg_write = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__mem_read = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__mem_write = VL_RAND_RESET_I(1);
@@ -233,6 +256,8 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__jalr = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__branch = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__alu_src = VL_RAND_RESET_I(1);
+    vlSelf->id_stage_pip__DOT__rs1_data_forwarded = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__rs2_data_forwarded = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__decoder__DOT__instr = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__decoder__DOT__opcode = VL_RAND_RESET_I(7);
     vlSelf->id_stage_pip__DOT__decoder__DOT__rd = VL_RAND_RESET_I(5);
@@ -246,6 +271,7 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__control__DOT__funct7 = VL_RAND_RESET_I(7);
     vlSelf->id_stage_pip__DOT__control__DOT__alu_ctrl = VL_RAND_RESET_I(4);
     vlSelf->id_stage_pip__DOT__control__DOT__branch_ctrl = VL_RAND_RESET_I(3);
+    vlSelf->id_stage_pip__DOT__control__DOT__wb_sel = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__control__DOT__reg_write = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__control__DOT__mem_read = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__control__DOT__mem_write = VL_RAND_RESET_I(1);
@@ -263,23 +289,25 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__reg_file__DOT__rd = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__reg_file__DOT__out_data_rs1 = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__reg_file__DOT__out_data_rs2 = VL_RAND_RESET_I(32);
-    for (int __Vi0 = 0; __Vi0 < 31; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->id_stage_pip__DOT__reg_file__DOT__register_[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->id_stage_pip__DOT__reg_file__DOT__i = VL_RAND_RESET_I(32);
-    vlSelf->id_stage_pip__DOT__reg_file__DOT____Vlvbound_hf3ed909f__0 = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rst = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__id_ex_write = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__id_ex_flush = VL_RAND_RESET_I(1);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__pc_in = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs1_data_in = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs2_data_in = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__imm_in = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__funct3_in = VL_RAND_RESET_I(3);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs1_in = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs2_in = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rd_in = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__alu_ctrl_in = VL_RAND_RESET_I(4);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__branch_ctrl_in = VL_RAND_RESET_I(3);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__wb_sel_in = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__reg_write_in = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__mem_read_in = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__mem_write_in = VL_RAND_RESET_I(1);
@@ -288,14 +316,17 @@ VL_ATTR_COLD void Vid_stage_pip___024root___ctor_var_reset(Vid_stage_pip___024ro
     vlSelf->id_stage_pip__DOT__idex_register__DOT__branch_in = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__jal_in = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__jalr_in = VL_RAND_RESET_I(1);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__pc_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs1_data_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs2_data_out = VL_RAND_RESET_I(32);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__imm_out = VL_RAND_RESET_I(32);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__funct3_out = VL_RAND_RESET_I(3);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs1_out = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rs2_out = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__rd_out = VL_RAND_RESET_I(5);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__alu_ctrl_out = VL_RAND_RESET_I(4);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__branch_ctrl_out = VL_RAND_RESET_I(3);
+    vlSelf->id_stage_pip__DOT__idex_register__DOT__wb_sel_out = VL_RAND_RESET_I(2);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__reg_write_out = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__mem_read_out = VL_RAND_RESET_I(1);
     vlSelf->id_stage_pip__DOT__idex_register__DOT__mem_write_out = VL_RAND_RESET_I(1);

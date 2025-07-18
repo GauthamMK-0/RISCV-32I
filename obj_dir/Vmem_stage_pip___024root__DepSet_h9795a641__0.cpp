@@ -27,19 +27,25 @@ VL_INLINE_OPT void Vmem_stage_pip___024root___ico_sequent__TOP__0(Vmem_stage_pip
     CData/*4:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
     // Body
+    vlSelfRef.pc_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out;
+    vlSelfRef.mem_stage_pip__DOT__pc_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out;
     vlSelfRef.alu_result_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__alu_result_out;
     vlSelfRef.mem_stage_pip__DOT__alu_result_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__alu_result_out;
     vlSelfRef.mem_data_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_data_out;
     vlSelfRef.mem_stage_pip__DOT__mem_data_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_data_out;
     vlSelfRef.rd_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out;
     vlSelfRef.mem_stage_pip__DOT__rd_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out;
+    vlSelfRef.wb_sel_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out;
+    vlSelfRef.mem_stage_pip__DOT__wb_sel_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out;
     vlSelfRef.reg_write_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__reg_write_out;
     vlSelfRef.mem_stage_pip__DOT__reg_write_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__reg_write_out;
     vlSelfRef.mem_to_reg_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out;
     vlSelfRef.mem_stage_pip__DOT__mem_to_reg_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out;
     vlSelfRef.mem_stage_pip__DOT__rst = vlSelfRef.rst;
+    vlSelfRef.mem_stage_pip__DOT__pc_in = vlSelfRef.pc_in;
     vlSelfRef.mem_stage_pip__DOT__rs2_data_in = vlSelfRef.rs2_data_in;
     vlSelfRef.mem_stage_pip__DOT__rd_in = vlSelfRef.rd_in;
+    vlSelfRef.mem_stage_pip__DOT__wb_sel_in = vlSelfRef.wb_sel_in;
     vlSelfRef.mem_stage_pip__DOT__mem_read_in = vlSelfRef.mem_read_in;
     vlSelfRef.mem_stage_pip__DOT__mem_write_in = vlSelfRef.mem_write_in;
     vlSelfRef.mem_stage_pip__DOT__reg_write_in = vlSelfRef.reg_write_in;
@@ -51,10 +57,14 @@ VL_INLINE_OPT void Vmem_stage_pip___024root___ico_sequent__TOP__0(Vmem_stage_pip
     vlSelfRef.mem_stage_pip__DOT__addr_lsb = (3U & vlSelfRef.alu_result_in);
     vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rst 
         = vlSelfRef.mem_stage_pip__DOT__rst;
+    vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_in 
+        = vlSelfRef.mem_stage_pip__DOT__pc_in;
     vlSelfRef.mem_stage_pip__DOT__memory__DOT__write_data 
         = vlSelfRef.mem_stage_pip__DOT__rs2_data_in;
     vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_in 
         = vlSelfRef.mem_stage_pip__DOT__rd_in;
+    vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_in 
+        = vlSelfRef.mem_stage_pip__DOT__wb_sel_in;
     vlSelfRef.mem_stage_pip__DOT__memory__DOT__mem_read 
         = vlSelfRef.mem_stage_pip__DOT__mem_read_in;
     vlSelfRef.mem_stage_pip__DOT__memory__DOT__mem_write 
@@ -427,10 +437,16 @@ VL_INLINE_OPT void Vmem_stage_pip___024root___nba_sequent__TOP__1(Vmem_stage_pip
     vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out 
         = ((1U & (~ (IData)(vlSelfRef.rst))) && (IData)(vlSelfRef.mem_to_reg_in));
     if (vlSelfRef.rst) {
+        vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out = 0U;
+        vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out = 0U;
         vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out = 0U;
         vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__alu_result_out = 0U;
         vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_data_out = 0U;
     } else {
+        vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out 
+            = vlSelfRef.wb_sel_in;
+        vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out 
+            = vlSelfRef.pc_in;
         vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out 
             = vlSelfRef.rd_in;
         vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__alu_result_out 
@@ -442,6 +458,10 @@ VL_INLINE_OPT void Vmem_stage_pip___024root___nba_sequent__TOP__1(Vmem_stage_pip
     vlSelfRef.mem_stage_pip__DOT__reg_write_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__reg_write_out;
     vlSelfRef.mem_to_reg_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out;
     vlSelfRef.mem_stage_pip__DOT__mem_to_reg_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out;
+    vlSelfRef.wb_sel_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out;
+    vlSelfRef.mem_stage_pip__DOT__wb_sel_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out;
+    vlSelfRef.pc_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out;
+    vlSelfRef.mem_stage_pip__DOT__pc_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__pc_out;
     vlSelfRef.rd_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out;
     vlSelfRef.mem_stage_pip__DOT__rd_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__rd_out;
     vlSelfRef.alu_result_out = vlSelfRef.mem_stage_pip__DOT__memwb_register__DOT__alu_result_out;
@@ -579,6 +599,8 @@ void Vmem_stage_pip___024root___eval_debug_assertions(Vmem_stage_pip___024root* 
         Verilated::overWidthError("funct3_in");}
     if (VL_UNLIKELY(((vlSelfRef.rd_in & 0xe0U)))) {
         Verilated::overWidthError("rd_in");}
+    if (VL_UNLIKELY(((vlSelfRef.wb_sel_in & 0xfcU)))) {
+        Verilated::overWidthError("wb_sel_in");}
     if (VL_UNLIKELY(((vlSelfRef.mem_read_in & 0xfeU)))) {
         Verilated::overWidthError("mem_read_in");}
     if (VL_UNLIKELY(((vlSelfRef.mem_write_in & 0xfeU)))) {

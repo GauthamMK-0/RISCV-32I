@@ -1,170 +1,127 @@
 #include "Vex_stage_pip.h"
 #include "verilated.h"
-#include <iostream>
+#include "verilated_vcd_c.h"
 
-void toggle_clock(Vex_stage_pip* top) {
-    top->clk = 0;
+VerilatedVcdC* tfp = nullptr;
+
+void tick(Vex_stage_pip* top, VerilatedVcdC* tfp) {
+    top->clk = 0; top->eval(); tfp->dump(Verilated::time()); Verilated::timeInc(1);
+    top->clk = 1; top->eval(); tfp->dump(Verilated::time()); Verilated::timeInc(1);
+}
+
+void reset(Vex_stage_pip* top) {
+    top->rst = 1;
     top->eval();
-    top->clk = 1;
+    tick(top, tfp);
+    top->rst = 0;
     top->eval();
+    tick(top, tfp);
 }
 
 int main() {
     Verilated::traceEverOn(true);
     Vex_stage_pip* top = new Vex_stage_pip;
+    tfp = new VerilatedVcdC;
+    top->trace(tfp, 99);
+    tfp->open("ex_stage.vcd");
 
-    top->rst = 0;
-    top->pc_in = 100;
-    top->imm_in = 8;
-    top->alu_ctrl_in = 0b0000;  // ADD
-    top->branch_ctrl_in = 0b000; // BEQ
+    reset(top);
+
+    // Shared control signals
     top->reg_write_in = 1;
     top->mem_read_in = 0;
     top->mem_write_in = 0;
     top->mem_to_reg_in = 0;
-    top->alu_src_in = 0;
-    top->branch_in = 0;
+    top->wb_sel_in = 0;
     top->jal_in = 0;
     top->jalr_in = 0;
-    top->rd_in = 5;
-    top->rs1_in = 1;
-    top->rs2_in = 2;
 
-    // ----------------------------
-    // Test 1: Simple ADD rs1 + rs2 = 20
-    // ----------------------------
+    // Test 1: Simple ADD rs1 + rs2 = 10 + 10
+    top->alu_ctrl_in = 0b0000;
+    top->alu_src_in = 0;
     top->rs1_data_in = 10;
     top->rs2_data_in = 10;
     top->forward_rs1 = 0;
     top->forward_rs2 = 0;
-    toggle_clock(top);
-    std::cout << "[Test 1] ADD rs1 + rs2 = " << top->alu_result_out << std::endl;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 2: Forward rs1 from MEM (20 + 5 = 25)
-    // ----------------------------
+    // Test 2: Forward rs1 from MEM
     top->rs1_data_in = 0;
     top->rs2_data_in = 5;
     top->forward_rs1 = 0b10;
     top->forward_data_mem = 20;
-    toggle_clock(top);
-    std::cout << "[Test 2] Forward rs1 from MEM: ALU result = " << top->alu_result_out << std::endl;
+    top->forward_rs2 = 0b00;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 3: Forward rs2 from WB (10 + 12 = 22)
-    // ----------------------------
+    // Test 3: Forward rs2 from WB
     top->rs1_data_in = 10;
     top->rs2_data_in = 0;
     top->forward_rs1 = 0b00;
     top->forward_rs2 = 0b01;
     top->forward_data_wb = 12;
-    toggle_clock(top);
-    std::cout << "[Test 3] Forward rs2 from WB: ALU result = " << top->alu_result_out << std::endl;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 4: Branch taken (BEQ: rs1 == rs2)
-    // ----------------------------
+    // Test 4: Branch taken (BEQ)
     top->rs1_data_in = 42;
     top->rs2_data_in = 42;
-    top->forward_rs1 = 0b00;
-    top->forward_rs2 = 0b00;
-    top->branch_in = 1;                    
-    top->branch_ctrl_in = 0b000;         
-    top->alu_ctrl_in = 0b001;         
-    top->imm_in = 4; 
-    toggle_clock(top);
-    std::cout << "[Test 4] Branch taken: " << (top->branch_taken_out ? "YES" : "NO") << std::endl;
-    std::cout << "branch = " << top->branch_in << ", "
-          << "branch_ctrl = " << top->branch_ctrl_in << ", "
-          << "alu_ctrl = " << top->alu_ctrl_in << ", "
-          << "rs1 = " << top->rs1_data_in << ", rs2 = " << top->rs2_data_in << ", "
-          << "branch_taken = " << top->branch_taken_out << std::endl;
+    top->branch_in = 1;
+    top->branch_ctrl_in = 0b000;
+    top->alu_ctrl_in = 0b0001;
+    top->alu_src_in = 0;
+    top->forward_rs1 = 0;
+    top->forward_rs2 = 0;
+    top->imm_in = 4;
+    tick(top, tfp);
 
-
-    // ----------------------------
-    // Test 5: Branch not taken (BEQ: rs1 != rs2)
-    // ----------------------------
+    // Test 5: Branch not taken (BEQ)
     top->rs1_data_in = 10;
     top->rs2_data_in = 20;
-    toggle_clock(top);
-    std::cout << "[Test 5] Branch taken: " << (top->branch_taken_out ? "YES" : "NO") << std::endl;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 6: JAL test
-    // ----------------------------
-    top->rst = 1;
-    top->eval();
-    toggle_clock(top);  // First reset clock
-    top->rst = 0;
+    // Test 6: JAL
+    reset(top);
     top->pc_in = 8;
     top->imm_in = 100;
     top->jal_in = 1;
     top->jalr_in = 0;
-    toggle_clock(top);
-    toggle_clock(top);
-    top->eval();
-    std::cout << "[Test 6] JAL -> jump_target_out = " << top->jump_target_out
-          << ", jump_out = " << static_cast<int>(top->jump_out) << std::endl;
+    tick(top, tfp);
 
-
-    top->jal_in = 0;
-    top->jalr_in = 0;
-    toggle_clock(top); 
-
-    // ----------------------------
-    // Test 7: Forwarding rs1 from MEM, rs2 from WB (20 + 5)
-    // ----------------------------
+    // Test 7: Forward rs1 from MEM + rs2 from WB
     top->rs1_data_in = 0;
     top->rs2_data_in = 0;
     top->forward_rs1 = 0b10;
     top->forward_rs2 = 0b01;
     top->forward_data_mem = 20;
     top->forward_data_wb = 5;
-    toggle_clock(top);
-    std::cout << "[Test 7] Forward rs1:MEM + rs2:WB => ALU result = " << top->alu_result_out << std::endl;
+    top->alu_ctrl_in = 0b0000;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 8: I-type ADDI (rs1 + imm)
-    // ----------------------------
+    // Test 8: I-type ADDI
     top->alu_src_in = 1;
     top->rs1_data_in = 17;
     top->imm_in = 8;
     top->forward_rs1 = 0b00;
     top->forward_rs2 = 0b00;
-    toggle_clock(top);
-    std::cout << "[Test 8] I-type ADDI rs1 + imm => ALU result = " << top->alu_result_out << std::endl;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 9: Forwarded rs2_data_out
-    // ----------------------------
+    // Test 9: rs2 forwarding
     top->alu_src_in = 0;
     top->rs1_data_in = 1;
     top->forward_rs2 = 0b10;
     top->forward_data_mem = 77;
-    toggle_clock(top);
-    toggle_clock(top);
-    std::cout << "[Test 9] Forwarded rs2 = " << top->rs2_data_out << std::endl;
+    tick(top, tfp);
 
-    // ----------------------------
-    // Test 10: JALR test
-    // ----------------------------
-
-    top->rst = 1;
-    top->eval();
-    toggle_clock(top);  // First reset clock
-    top->rst = 0;
+    // Test 10: JALR
+    reset(top);
     top->pc_in = 12;
     top->rs1_data_in = 100;
     top->imm_in = 8;
     top->jal_in = 0;
     top->jalr_in = 1;
-    toggle_clock(top);
-    toggle_clock(top);
-    std::cout << "[Test 10] JALR -> jump_target_out = " << top->jump_target_out << ", jump_out = " << static_cast<int>(top->jump_out) << std::endl;
+    tick(top, tfp);
 
-    top->jal_in = 0;
-    top->jalr_in = 0;
-
+    tfp->close();
+    delete tfp;
     delete top;
     return 0;
 }

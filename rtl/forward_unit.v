@@ -22,14 +22,13 @@ always @(*) begin
     forward_rs1_id = 2'b00;
     forward_rs2_id = 2'b00;
 
-    // Forwarding for rs1
+    // Forwarding for EX stage
     if (mem_reg_write && (mem_rd != 5'b0) && (mem_rd == ex_rs1)) begin
         forward_rs1_ex = 2'b10;  // Forward from MEM
     end else if (wb_reg_write && (wb_rd != 5'b0) && (wb_rd == ex_rs1)) begin
         forward_rs1_ex = 2'b01;  // Forward from WB
     end
 
-    // Forwarding for rs2
     if (mem_reg_write && (mem_rd != 5'b0) && (mem_rd == ex_rs2)) begin
         forward_rs2_ex = 2'b10;  // Forward from MEM
     end else if (wb_reg_write && (wb_rd != 5'b0) && (wb_rd == ex_rs2)) begin

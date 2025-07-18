@@ -13,6 +13,7 @@
 
 class Vid_stage_pip__Syms;
 class Vid_stage_pip___024root;
+class VerilatedVcdC;
 
 // This class is the main interface to the Verilated model
 class alignas(VL_CACHE_LINE_BYTES) Vid_stage_pip VL_NOT_FINAL : public VerilatedModel {
@@ -24,7 +25,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vid_stage_pip VL_NOT_FINAL : public Verilated
 
     // CONSTEXPR CAPABILITIES
     // Verilated with --trace?
-    static constexpr bool traceCapable = false;
+    static constexpr bool traceCapable = true;
 
     // PORTS
     // The application code writes and reads these signals to
@@ -35,14 +36,22 @@ class alignas(VL_CACHE_LINE_BYTES) Vid_stage_pip VL_NOT_FINAL : public Verilated
     VL_IN8(&id_ex_write,0,0);
     VL_IN8(&reg_write_wb,0,0);
     VL_IN8(&rd_wb,4,0);
+    VL_IN8(&ex_rd,4,0);
+    VL_IN8(&mem_rd,4,0);
+    VL_IN8(&ex_reg_write,0,0);
+    VL_IN8(&mem_reg_write,0,0);
+    VL_IN8(&forward_rs1,1,0);
+    VL_IN8(&forward_rs2,1,0);
     VL_OUT8(&rs1_hzd,4,0);
     VL_OUT8(&rs2_hzd,4,0);
     VL_OUT8(&rd_hzd,4,0);
     VL_OUT8(&rs1_out,4,0);
     VL_OUT8(&rs2_out,4,0);
     VL_OUT8(&rd_out,4,0);
+    VL_OUT8(&funct3_out,2,0);
     VL_OUT8(&alu_ctrl_out,3,0);
     VL_OUT8(&branch_ctrl_out,2,0);
+    VL_OUT8(&wb_sel_out,1,0);
     VL_OUT8(&reg_write_out,0,0);
     VL_OUT8(&mem_read_out,0,0);
     VL_OUT8(&mem_write_out,0,0);
@@ -54,6 +63,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vid_stage_pip VL_NOT_FINAL : public Verilated
     VL_IN(&instr_in,31,0);
     VL_IN(&pc_in,31,0);
     VL_IN(&rd_data_wb,31,0);
+    VL_IN(&ex_alu_result,31,0);
+    VL_IN(&mem_alu_result,31,0);
+    VL_OUT(&pc_out,31,0);
     VL_OUT(&rs1_data_out,31,0);
     VL_OUT(&rs2_data_out,31,0);
     VL_OUT(&imm_out,31,0);
@@ -108,6 +120,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vid_stage_pip VL_NOT_FINAL : public Verilated
     /// Re-init after cloning the model at the process level (e.g. fork in Linux)
     /// Re-allocate necessary resources. Called after cloning.
     void atClone() const;
+    std::unique_ptr<VerilatedTraceConfig> traceConfig() const override final;
   private:
     // Internal functions - trace registration
     void traceBaseModel(VerilatedTraceBaseC* tfp, int levels, int options);

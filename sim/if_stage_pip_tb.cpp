@@ -1,102 +1,109 @@
-#include "Vif_stage_pip.h"   // Verilated module header
+#include "Vif_stage_pip.h"   
 #include "verilated.h"
+#include "verilated_vcd_c.h"
 #include <iostream>
-#include <cstdlib>
+#include <iomanip>
 
-// Clock period in simulation time units
-const vluint64_t clk_period = 10;
+const vluint64_t clk_period = 10;  // time units per cycle
+vluint64_t main_time = 0;
+
+// Time getter for Verilator
+double sc_time_stamp() {
+    return main_time;
+}
 
 int main(int argc, char** argv, char** env) {
     Verilated::commandArgs(argc, argv);
+    Verilated::traceEverOn(true);
+
     Vif_stage_pip* top = new Vif_stage_pip;
+    VerilatedVcdC* tfp = new VerilatedVcdC;
+    top->trace(tfp, 99);
+    tfp->open("if_stage.vcd");
 
-    vluint64_t main_time = 0;
-
-    // Helper to toggle clock
+    // Clock toggle function with VCD dump
     auto toggle_clk = [&]() {
         top->clk = 0;
         top->eval();
+        tfp->dump(main_time);
         main_time += clk_period / 2;
 
         top->clk = 1;
         top->eval();
+        tfp->dump(main_time);
         main_time += clk_period / 2;
     };
 
-    // Initialize inputs
-    top->rst = 0;
+    // === Initialize ===
+    top->rst = 1;
     top->pc_write = 0;
     top->if_id_write = 0;
-    top->flush = 0;
+    top->if_id_flush = 0;
     top->jump = 0;
     top->branch_taken = 0;
     top->branch_target = 0;
     top->jump_target = 0;
 
-    // Apply reset for 2 cycles
-    toggle_clk();
-    toggle_clk();
-    top->rst = 1;
+    std::cout << "Starting pipeline IF stage simulation...\n";
 
-    std::cout << "Starting testbench simulation...\n";
+    // === Apply Reset ===
+    toggle_clk();  // Cycle 0
+    toggle_clk();  // Cycle 1
+    top->rst = 0;
 
-    // Test sequence
-
-    // Cycle 1: Normal PC increment
+    // === Start Fetching Instructions Sequentially ===
     top->pc_write = 1;
     top->if_id_write = 1;
-    top->flush = 0;
-    top->jump = 0;
-    top->branch_taken = 0;
-    toggle_clk();
-    std::cout << "Cycle 1: PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
 
-    // Cycle 2: Flush asserted - IF/ID pipeline cleared
-    top->flush = 1;
-    toggle_clk();
-    std::cout << "Cycle 2 (flush): PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
-
-    // Cycle 3: Flush cleared, branch taken
-    top->flush = 0;
-    top->branch_taken = 1;
-    top->branch_target = 0x40; // example branch target
-    toggle_clk();
-    std::cout << "Cycle 3 (branch taken): PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
-
-    // Cycle 4: Jump asserted
-    top->branch_taken = 0;
-    top->jump = 1;
-    top->jump_target = 0x80; // example jump target
-    toggle_clk();
-    std::cout << "Cycle 4 (jump): PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
-
-    // Cycle 5: Disable pc_write (stall PC)
-    top->jump = 0;
-    top->pc_write = 0;
-    toggle_clk();
-    std::cout << "Cycle 5 (pc_write=0 stall): PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
-
-    // Cycle 6: Normal operation resume
-    top->pc_write = 1;
-    top->if_id_write = 1;
-    toggle_clk();
-    std::cout << "Cycle 6 (normal resume): PC=" << std::hex << top->pc_out
-              << ", Instr=" << top->instr_out << "\n";
-
-    // Run a few more cycles to check stability
-    for (int i = 7; i <= 12; i++) {
+    for (int cycle = 2; cycle <= 15; ++cycle) {
         toggle_clk();
-        std::cout << "Cycle " << i << ": PC=" << std::hex << top->pc_out
-                  << ", Instr=" << top->instr_out << "\n";
+        std::cout << "Cycle " << std::dec << cycle
+                  << " | PC = 0x" << std::setw(8) << std::setfill('0') << std::hex << top->pc_out
+                  << " | Instr = 0x" << std::setw(8) << top->instr_out << "\n";
     }
 
-    std::cout << "Testbench simulation finished.\n";
+    // === Test Branch Taken ===
+    top->branch_taken = 1;
+    top->branch_target = 0x10 << 2; // Jump to memory[16]
+    toggle_clk();
+    std::cout << "[Branch] PC = 0x" << std::hex << top->pc_out
+              << " | Instr = 0x" << top->instr_out << "\n";
+    top->branch_taken = 0;
 
+    // === Test Jump ===
+    top->jump = 1;
+    top->jump_target = 0x14 << 2; // Jump to memory[20]
+    toggle_clk();
+    std::cout << "[Jump] PC = 0x" << std::hex << top->pc_out
+              << " | Instr = 0x" << top->instr_out << "\n";
+    top->jump = 0;
+
+    // === Test Stall (PC Write Disable) ===
+    top->pc_write = 0;
+    toggle_clk();
+    std::cout << "[Stall] PC = 0x" << std::hex << top->pc_out
+              << " | Instr = 0x" << top->instr_out << " (Should remain same)\n";
+    top->pc_write = 1;
+
+    // === Test Flush ===
+    top->if_id_flush = 1;
+    toggle_clk();
+    std::cout << "[Flush] PC = 0x" << std::hex << top->pc_out
+              << " | Instr = 0x" << top->instr_out << " (Flushed instruction)\n";
+    top->if_id_flush = 0;
+
+    // === Continue for a few more cycles ===
+    for (int i = 0; i < 4; ++i) {
+        toggle_clk();
+        std::cout << "Cycle " << (20 + i)
+                  << " | PC = 0x" << std::setw(8) << top->pc_out
+                  << " | Instr = 0x" << std::setw(8) << top->instr_out << "\n";
+    }
+
+    std::cout << "Simulation completed.\n";
+
+    tfp->close();
+    delete tfp;
     delete top;
     return 0;
 }

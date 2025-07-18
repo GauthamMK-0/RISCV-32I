@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
     std::cout << "=== Begin Pipeline Simulation ===" << std::endl;
 
-    for (int cycle = 0; cycle < 30; ++cycle) {
+    for (int cycle = 0; cycle < 25; ++cycle) {
         tick(dut);
         print_debug(dut, cycle);
     }

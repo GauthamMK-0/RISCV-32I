@@ -17,6 +17,8 @@ constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT
 constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT__SRA;
 constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT__SLT;
 constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT__SLTU;
+constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT__PASS;
+constexpr CData/*3:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__alu_unit__DOT__ADD_PC;
 constexpr CData/*2:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__brch_unit__DOT__BEQ;
 constexpr CData/*2:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__brch_unit__DOT__BNE;
 constexpr CData/*2:0*/ Vex_stage_pip___024root::ex_stage_pip__DOT__brch_unit__DOT__BLT;

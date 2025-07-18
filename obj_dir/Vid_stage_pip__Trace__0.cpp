@@ -1,0 +1,246 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Tracing implementation internals
+#include "verilated_vcd_c.h"
+#include "Vid_stage_pip__Syms.h"
+
+
+void Vid_stage_pip___024root__trace_chg_0_sub_0(Vid_stage_pip___024root* vlSelf, VerilatedVcd::Buffer* bufp);
+
+void Vid_stage_pip___024root__trace_chg_0(void* voidSelf, VerilatedVcd::Buffer* bufp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vid_stage_pip___024root__trace_chg_0\n"); );
+    // Init
+    Vid_stage_pip___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vid_stage_pip___024root*>(voidSelf);
+    Vid_stage_pip__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    if (VL_UNLIKELY(!vlSymsp->__Vm_activity)) return;
+    // Body
+    Vid_stage_pip___024root__trace_chg_0_sub_0((&vlSymsp->TOP), bufp);
+}
+
+void Vid_stage_pip___024root__trace_chg_0_sub_0(Vid_stage_pip___024root* vlSelf, VerilatedVcd::Buffer* bufp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vid_stage_pip___024root__trace_chg_0_sub_0\n"); );
+    Vid_stage_pip__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Init
+    uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
+    // Body
+    bufp->chgBit(oldp+0,(vlSelfRef.clk));
+    bufp->chgBit(oldp+1,(vlSelfRef.rst));
+    bufp->chgBit(oldp+2,(vlSelfRef.id_ex_flush));
+    bufp->chgBit(oldp+3,(vlSelfRef.id_ex_write));
+    bufp->chgIData(oldp+4,(vlSelfRef.instr_in),32);
+    bufp->chgIData(oldp+5,(vlSelfRef.pc_in),32);
+    bufp->chgBit(oldp+6,(vlSelfRef.reg_write_wb));
+    bufp->chgCData(oldp+7,(vlSelfRef.rd_wb),5);
+    bufp->chgIData(oldp+8,(vlSelfRef.rd_data_wb),32);
+    bufp->chgIData(oldp+9,(vlSelfRef.ex_alu_result),32);
+    bufp->chgIData(oldp+10,(vlSelfRef.mem_alu_result),32);
+    bufp->chgCData(oldp+11,(vlSelfRef.ex_rd),5);
+    bufp->chgCData(oldp+12,(vlSelfRef.mem_rd),5);
+    bufp->chgBit(oldp+13,(vlSelfRef.ex_reg_write));
+    bufp->chgBit(oldp+14,(vlSelfRef.mem_reg_write));
+    bufp->chgCData(oldp+15,(vlSelfRef.forward_rs1),2);
+    bufp->chgCData(oldp+16,(vlSelfRef.forward_rs2),2);
+    bufp->chgCData(oldp+17,(vlSelfRef.rs1_hzd),5);
+    bufp->chgCData(oldp+18,(vlSelfRef.rs2_hzd),5);
+    bufp->chgCData(oldp+19,(vlSelfRef.rd_hzd),5);
+    bufp->chgCData(oldp+20,(vlSelfRef.rs1_out),5);
+    bufp->chgCData(oldp+21,(vlSelfRef.rs2_out),5);
+    bufp->chgCData(oldp+22,(vlSelfRef.rd_out),5);
+    bufp->chgIData(oldp+23,(vlSelfRef.pc_out),32);
+    bufp->chgIData(oldp+24,(vlSelfRef.rs1_data_out),32);
+    bufp->chgIData(oldp+25,(vlSelfRef.rs2_data_out),32);
+    bufp->chgIData(oldp+26,(vlSelfRef.imm_out),32);
+    bufp->chgCData(oldp+27,(vlSelfRef.funct3_out),3);
+    bufp->chgCData(oldp+28,(vlSelfRef.alu_ctrl_out),4);
+    bufp->chgCData(oldp+29,(vlSelfRef.branch_ctrl_out),3);
+    bufp->chgCData(oldp+30,(vlSelfRef.wb_sel_out),2);
+    bufp->chgBit(oldp+31,(vlSelfRef.reg_write_out));
+    bufp->chgBit(oldp+32,(vlSelfRef.mem_read_out));
+    bufp->chgBit(oldp+33,(vlSelfRef.mem_write_out));
+    bufp->chgBit(oldp+34,(vlSelfRef.mem_to_reg_out));
+    bufp->chgBit(oldp+35,(vlSelfRef.jal_out));
+    bufp->chgBit(oldp+36,(vlSelfRef.jalr_out));
+    bufp->chgBit(oldp+37,(vlSelfRef.branch_out));
+    bufp->chgBit(oldp+38,(vlSelfRef.alu_src_out));
+    bufp->chgBit(oldp+39,(vlSelfRef.id_stage_pip__DOT__clk));
+    bufp->chgBit(oldp+40,(vlSelfRef.id_stage_pip__DOT__rst));
+    bufp->chgBit(oldp+41,(vlSelfRef.id_stage_pip__DOT__id_ex_flush));
+    bufp->chgBit(oldp+42,(vlSelfRef.id_stage_pip__DOT__id_ex_write));
+    bufp->chgIData(oldp+43,(vlSelfRef.id_stage_pip__DOT__instr_in),32);
+    bufp->chgIData(oldp+44,(vlSelfRef.id_stage_pip__DOT__pc_in),32);
+    bufp->chgBit(oldp+45,(vlSelfRef.id_stage_pip__DOT__reg_write_wb));
+    bufp->chgCData(oldp+46,(vlSelfRef.id_stage_pip__DOT__rd_wb),5);
+    bufp->chgIData(oldp+47,(vlSelfRef.id_stage_pip__DOT__rd_data_wb),32);
+    bufp->chgIData(oldp+48,(vlSelfRef.id_stage_pip__DOT__ex_alu_result),32);
+    bufp->chgIData(oldp+49,(vlSelfRef.id_stage_pip__DOT__mem_alu_result),32);
+    bufp->chgCData(oldp+50,(vlSelfRef.id_stage_pip__DOT__ex_rd),5);
+    bufp->chgCData(oldp+51,(vlSelfRef.id_stage_pip__DOT__mem_rd),5);
+    bufp->chgBit(oldp+52,(vlSelfRef.id_stage_pip__DOT__ex_reg_write));
+    bufp->chgBit(oldp+53,(vlSelfRef.id_stage_pip__DOT__mem_reg_write));
+    bufp->chgCData(oldp+54,(vlSelfRef.id_stage_pip__DOT__forward_rs1),2);
+    bufp->chgCData(oldp+55,(vlSelfRef.id_stage_pip__DOT__forward_rs2),2);
+    bufp->chgCData(oldp+56,(vlSelfRef.id_stage_pip__DOT__rs1_hzd),5);
+    bufp->chgCData(oldp+57,(vlSelfRef.id_stage_pip__DOT__rs2_hzd),5);
+    bufp->chgCData(oldp+58,(vlSelfRef.id_stage_pip__DOT__rd_hzd),5);
+    bufp->chgCData(oldp+59,(vlSelfRef.id_stage_pip__DOT__rs1_out),5);
+    bufp->chgCData(oldp+60,(vlSelfRef.id_stage_pip__DOT__rs2_out),5);
+    bufp->chgCData(oldp+61,(vlSelfRef.id_stage_pip__DOT__rd_out),5);
+    bufp->chgIData(oldp+62,(vlSelfRef.id_stage_pip__DOT__pc_out),32);
+    bufp->chgIData(oldp+63,(vlSelfRef.id_stage_pip__DOT__rs1_data_out),32);
+    bufp->chgIData(oldp+64,(vlSelfRef.id_stage_pip__DOT__rs2_data_out),32);
+    bufp->chgIData(oldp+65,(vlSelfRef.id_stage_pip__DOT__imm_out),32);
+    bufp->chgCData(oldp+66,(vlSelfRef.id_stage_pip__DOT__funct3_out),3);
+    bufp->chgCData(oldp+67,(vlSelfRef.id_stage_pip__DOT__alu_ctrl_out),4);
+    bufp->chgCData(oldp+68,(vlSelfRef.id_stage_pip__DOT__branch_ctrl_out),3);
+    bufp->chgCData(oldp+69,(vlSelfRef.id_stage_pip__DOT__wb_sel_out),2);
+    bufp->chgBit(oldp+70,(vlSelfRef.id_stage_pip__DOT__reg_write_out));
+    bufp->chgBit(oldp+71,(vlSelfRef.id_stage_pip__DOT__mem_read_out));
+    bufp->chgBit(oldp+72,(vlSelfRef.id_stage_pip__DOT__mem_write_out));
+    bufp->chgBit(oldp+73,(vlSelfRef.id_stage_pip__DOT__mem_to_reg_out));
+    bufp->chgBit(oldp+74,(vlSelfRef.id_stage_pip__DOT__jal_out));
+    bufp->chgBit(oldp+75,(vlSelfRef.id_stage_pip__DOT__jalr_out));
+    bufp->chgBit(oldp+76,(vlSelfRef.id_stage_pip__DOT__branch_out));
+    bufp->chgBit(oldp+77,(vlSelfRef.id_stage_pip__DOT__alu_src_out));
+    bufp->chgCData(oldp+78,(vlSelfRef.id_stage_pip__DOT__opcode),7);
+    bufp->chgCData(oldp+79,(vlSelfRef.id_stage_pip__DOT__funct3),3);
+    bufp->chgCData(oldp+80,(vlSelfRef.id_stage_pip__DOT__funct7),7);
+    bufp->chgCData(oldp+81,(vlSelfRef.id_stage_pip__DOT__rs1),5);
+    bufp->chgCData(oldp+82,(vlSelfRef.id_stage_pip__DOT__rs2),5);
+    bufp->chgCData(oldp+83,(vlSelfRef.id_stage_pip__DOT__rd),5);
+    bufp->chgIData(oldp+84,(vlSelfRef.id_stage_pip__DOT__imm),32);
+    bufp->chgIData(oldp+85,(vlSelfRef.id_stage_pip__DOT__rs1_data),32);
+    bufp->chgIData(oldp+86,(vlSelfRef.id_stage_pip__DOT__rs2_data),32);
+    bufp->chgCData(oldp+87,(vlSelfRef.id_stage_pip__DOT__alu_ctrl),4);
+    bufp->chgCData(oldp+88,(vlSelfRef.id_stage_pip__DOT__branch_ctrl),3);
+    bufp->chgCData(oldp+89,(vlSelfRef.id_stage_pip__DOT__wb_sel),2);
+    bufp->chgBit(oldp+90,(vlSelfRef.id_stage_pip__DOT__reg_write));
+    bufp->chgBit(oldp+91,(vlSelfRef.id_stage_pip__DOT__mem_read));
+    bufp->chgBit(oldp+92,(vlSelfRef.id_stage_pip__DOT__mem_write));
+    bufp->chgBit(oldp+93,(vlSelfRef.id_stage_pip__DOT__mem_to_reg));
+    bufp->chgBit(oldp+94,(vlSelfRef.id_stage_pip__DOT__jal));
+    bufp->chgBit(oldp+95,(vlSelfRef.id_stage_pip__DOT__jalr));
+    bufp->chgBit(oldp+96,(vlSelfRef.id_stage_pip__DOT__branch));
+    bufp->chgBit(oldp+97,(vlSelfRef.id_stage_pip__DOT__alu_src));
+    bufp->chgIData(oldp+98,(vlSelfRef.id_stage_pip__DOT__rs1_data_forwarded),32);
+    bufp->chgIData(oldp+99,(vlSelfRef.id_stage_pip__DOT__rs2_data_forwarded),32);
+    bufp->chgCData(oldp+100,(vlSelfRef.id_stage_pip__DOT__control__DOT__opcode),7);
+    bufp->chgCData(oldp+101,(vlSelfRef.id_stage_pip__DOT__control__DOT__funct3),3);
+    bufp->chgCData(oldp+102,(vlSelfRef.id_stage_pip__DOT__control__DOT__funct7),7);
+    bufp->chgCData(oldp+103,(vlSelfRef.id_stage_pip__DOT__control__DOT__alu_ctrl),4);
+    bufp->chgCData(oldp+104,(vlSelfRef.id_stage_pip__DOT__control__DOT__branch_ctrl),3);
+    bufp->chgCData(oldp+105,(vlSelfRef.id_stage_pip__DOT__control__DOT__wb_sel),2);
+    bufp->chgBit(oldp+106,(vlSelfRef.id_stage_pip__DOT__control__DOT__reg_write));
+    bufp->chgBit(oldp+107,(vlSelfRef.id_stage_pip__DOT__control__DOT__mem_read));
+    bufp->chgBit(oldp+108,(vlSelfRef.id_stage_pip__DOT__control__DOT__mem_write));
+    bufp->chgBit(oldp+109,(vlSelfRef.id_stage_pip__DOT__control__DOT__mem_to_reg));
+    bufp->chgBit(oldp+110,(vlSelfRef.id_stage_pip__DOT__control__DOT__jal));
+    bufp->chgBit(oldp+111,(vlSelfRef.id_stage_pip__DOT__control__DOT__jalr));
+    bufp->chgBit(oldp+112,(vlSelfRef.id_stage_pip__DOT__control__DOT__branch));
+    bufp->chgBit(oldp+113,(vlSelfRef.id_stage_pip__DOT__control__DOT__alu_src));
+    bufp->chgIData(oldp+114,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__instr),32);
+    bufp->chgCData(oldp+115,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__opcode),7);
+    bufp->chgCData(oldp+116,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__rd),5);
+    bufp->chgCData(oldp+117,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__rs1),5);
+    bufp->chgCData(oldp+118,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__rs2),5);
+    bufp->chgCData(oldp+119,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__funct3),3);
+    bufp->chgCData(oldp+120,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__funct7),7);
+    bufp->chgIData(oldp+121,(vlSelfRef.id_stage_pip__DOT__decoder__DOT__imm),32);
+    bufp->chgBit(oldp+122,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__clk));
+    bufp->chgBit(oldp+123,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rst));
+    bufp->chgBit(oldp+124,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__id_ex_write));
+    bufp->chgBit(oldp+125,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__id_ex_flush));
+    bufp->chgIData(oldp+126,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__pc_in),32);
+    bufp->chgIData(oldp+127,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs1_data_in),32);
+    bufp->chgIData(oldp+128,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs2_data_in),32);
+    bufp->chgIData(oldp+129,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__imm_in),32);
+    bufp->chgCData(oldp+130,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__funct3_in),3);
+    bufp->chgCData(oldp+131,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs1_in),5);
+    bufp->chgCData(oldp+132,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs2_in),5);
+    bufp->chgCData(oldp+133,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rd_in),5);
+    bufp->chgCData(oldp+134,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__alu_ctrl_in),4);
+    bufp->chgCData(oldp+135,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__branch_ctrl_in),3);
+    bufp->chgCData(oldp+136,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__wb_sel_in),2);
+    bufp->chgBit(oldp+137,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__reg_write_in));
+    bufp->chgBit(oldp+138,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_read_in));
+    bufp->chgBit(oldp+139,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_write_in));
+    bufp->chgBit(oldp+140,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_to_reg_in));
+    bufp->chgBit(oldp+141,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__alu_src_in));
+    bufp->chgBit(oldp+142,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__branch_in));
+    bufp->chgBit(oldp+143,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__jal_in));
+    bufp->chgBit(oldp+144,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__jalr_in));
+    bufp->chgIData(oldp+145,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__pc_out),32);
+    bufp->chgIData(oldp+146,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs1_data_out),32);
+    bufp->chgIData(oldp+147,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs2_data_out),32);
+    bufp->chgIData(oldp+148,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__imm_out),32);
+    bufp->chgCData(oldp+149,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__funct3_out),3);
+    bufp->chgCData(oldp+150,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs1_out),5);
+    bufp->chgCData(oldp+151,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rs2_out),5);
+    bufp->chgCData(oldp+152,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__rd_out),5);
+    bufp->chgCData(oldp+153,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__alu_ctrl_out),4);
+    bufp->chgCData(oldp+154,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__branch_ctrl_out),3);
+    bufp->chgCData(oldp+155,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__wb_sel_out),2);
+    bufp->chgBit(oldp+156,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__reg_write_out));
+    bufp->chgBit(oldp+157,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_read_out));
+    bufp->chgBit(oldp+158,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_write_out));
+    bufp->chgBit(oldp+159,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__mem_to_reg_out));
+    bufp->chgBit(oldp+160,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__alu_src_out));
+    bufp->chgBit(oldp+161,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__branch_out));
+    bufp->chgBit(oldp+162,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__jal_out));
+    bufp->chgBit(oldp+163,(vlSelfRef.id_stage_pip__DOT__idex_register__DOT__jalr_out));
+    bufp->chgBit(oldp+164,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__clk));
+    bufp->chgBit(oldp+165,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__rst));
+    bufp->chgBit(oldp+166,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__reg_write));
+    bufp->chgIData(oldp+167,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__rd_data),32);
+    bufp->chgCData(oldp+168,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__rs1),5);
+    bufp->chgCData(oldp+169,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__rs2),5);
+    bufp->chgCData(oldp+170,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__rd),5);
+    bufp->chgIData(oldp+171,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__out_data_rs1),32);
+    bufp->chgIData(oldp+172,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__out_data_rs2),32);
+    bufp->chgIData(oldp+173,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[0]),32);
+    bufp->chgIData(oldp+174,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[1]),32);
+    bufp->chgIData(oldp+175,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[2]),32);
+    bufp->chgIData(oldp+176,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[3]),32);
+    bufp->chgIData(oldp+177,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[4]),32);
+    bufp->chgIData(oldp+178,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[5]),32);
+    bufp->chgIData(oldp+179,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[6]),32);
+    bufp->chgIData(oldp+180,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[7]),32);
+    bufp->chgIData(oldp+181,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[8]),32);
+    bufp->chgIData(oldp+182,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[9]),32);
+    bufp->chgIData(oldp+183,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[10]),32);
+    bufp->chgIData(oldp+184,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[11]),32);
+    bufp->chgIData(oldp+185,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[12]),32);
+    bufp->chgIData(oldp+186,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[13]),32);
+    bufp->chgIData(oldp+187,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[14]),32);
+    bufp->chgIData(oldp+188,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[15]),32);
+    bufp->chgIData(oldp+189,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[16]),32);
+    bufp->chgIData(oldp+190,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[17]),32);
+    bufp->chgIData(oldp+191,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[18]),32);
+    bufp->chgIData(oldp+192,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[19]),32);
+    bufp->chgIData(oldp+193,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[20]),32);
+    bufp->chgIData(oldp+194,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[21]),32);
+    bufp->chgIData(oldp+195,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[22]),32);
+    bufp->chgIData(oldp+196,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[23]),32);
+    bufp->chgIData(oldp+197,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[24]),32);
+    bufp->chgIData(oldp+198,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[25]),32);
+    bufp->chgIData(oldp+199,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[26]),32);
+    bufp->chgIData(oldp+200,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[27]),32);
+    bufp->chgIData(oldp+201,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[28]),32);
+    bufp->chgIData(oldp+202,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[29]),32);
+    bufp->chgIData(oldp+203,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[30]),32);
+    bufp->chgIData(oldp+204,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__register_[31]),32);
+    bufp->chgIData(oldp+205,(vlSelfRef.id_stage_pip__DOT__reg_file__DOT__i),32);
+}
+
+void Vid_stage_pip___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vid_stage_pip___024root__trace_cleanup\n"); );
+    // Init
+    Vid_stage_pip___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vid_stage_pip___024root*>(voidSelf);
+    Vid_stage_pip__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VlUnpacked<CData/*0:0*/, 1> __Vm_traceActivity;
+    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
+        __Vm_traceActivity[__Vi0] = 0;
+    }
+    // Body
+    vlSymsp->__Vm_activity = false;
+    __Vm_traceActivity[0U] = 0U;
+}

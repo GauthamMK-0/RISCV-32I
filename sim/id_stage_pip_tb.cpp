@@ -1,140 +1,59 @@
-#include "Vid_stage_pip.h"  // Replace with your verilated top module header
+#include "Vid_stage_pip.h"
 #include "verilated.h"
-#include <iostream>
-#include <iomanip>
+#include "verilated_vcd_c.h"
 
-// Helper function to simulate a clock cycle
-void eval_and_step(Vid_stage_pip* top, vluint64_t& time) {
-    top->clk = 0;
-    top->eval();
-    time++;
-    top->clk = 1;
-    top->eval();
-    time++;
+VerilatedVcdC* tfp = nullptr;
+
+void tick(Vid_stage_pip* top, VerilatedVcdC* tfp) {
+    top->clk = 0; top->eval(); tfp->dump(Verilated::time()); Verilated::timeInc(5);
+    top->clk = 1; top->eval(); tfp->dump(Verilated::time()); Verilated::timeInc(5);
 }
 
-int main(int argc, char** argv) {
-    Verilated::commandArgs(argc, argv);
-    Vid_stage_pip* top = new Vid_stage_pip;
-
-    vluint64_t time = 0;
-
-    // Initial reset
+void reset(Vid_stage_pip* top) {
     top->rst = 1;
-    top->id_ex_flush = 0;
-    top->id_ex_write = 0;
-    top->instr_in = 0;
-    top->pc_in = 0;
-    top->reg_write_wb = 0;
-    top->rd_wb = 0;
-    top->rd_data_wb = 0;
-
-    eval_and_step(top, time);
-    eval_and_step(top, time);
-
-    // Release reset
+    top->eval();
+    tick(top, tfp);
     top->rst = 0;
-    eval_and_step(top, time);
+    top->eval();
+    tick(top, tfp);
+}
 
-    std::cout << "=== After Reset ===\n";
-    std::cout << "rs1_out        = " << int(top->rs1_out) << "\n";
-    std::cout << "rs2_out        = " << int(top->rs2_out) << "\n";
-    std::cout << "rd_out         = " << int(top->rd_out) << "\n";
-    std::cout << "rs1_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs1_data_out << std::dec << "\n";
-    std::cout << "rs2_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs2_data_out << std::dec << "\n";
-    std::cout << "imm_out        = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->imm_out << std::dec << "\n";
-    std::cout << "alu_ctrl_out   = 0x" << std::hex << int(top->alu_ctrl_out) << std::dec << "\n";
-    std::cout << "branch_ctrl_out= " << int(top->branch_ctrl_out) << "\n";
-    std::cout << "reg_write_out  = " << int(top->reg_write_out) << "\n";
-    std::cout << "mem_read_out   = " << int(top->mem_read_out) << "\n";
-    std::cout << "mem_write_out  = " << int(top->mem_write_out) << "\n";
-    std::cout << "mem_to_reg_out = " << int(top->mem_to_reg_out) << "\n";
-    std::cout << "jal_out        = " << int(top->jal_out) << "\n";
-    std::cout << "jalr_out       = " << int(top->jalr_out) << "\n";
-    std::cout << "branch_out     = " << int(top->branch_out) << "\n";
-    std::cout << "alu_src_out    = " << int(top->alu_src_out) << "\n\n";
+int main() {
+    Verilated::traceEverOn(true);
+    Vid_stage_pip* top = new Vid_stage_pip;
+    tfp = new VerilatedVcdC;
+    top->trace(tfp, 99);
+    tfp->open("id_stage.vcd");
 
-    // Preload register file: Write 0xAAAA5555 to x5 via write-back interface
+    reset(top);
+
+    // --- Test 1: ADD x10, x10, x11 ---
+    top->instr_in = 0x00B50533; // ADD x10, x10, x11
+    top->pc_in = 0x00000000;
     top->reg_write_wb = 1;
     top->rd_wb = 5;
-    top->rd_data_wb = 0xAAAA5555;
-    eval_and_step(top, time);
-
-    // Disable write-back after preload to avoid overwriting
-    top->reg_write_wb = 0;
-    eval_and_step(top, time);
-
-    // Provide a valid addi instruction: addi x5, x10, 42 (0x02A28293)
-    top->instr_in = 0x02A28293;
+    top->rd_data_wb = 42;
+    top->ex_alu_result = 100;
+    top->mem_alu_result = 200;
+    top->ex_rd = 10;
+    top->mem_rd = 11;
+    top->ex_reg_write = 1;
+    top->mem_reg_write = 1;
+    top->forward_rs1 = 0b01;  // WB
+    top->forward_rs2 = 0b10;  // MEM
+    top->id_ex_flush = 0;
     top->id_ex_write = 1;
-    top->id_ex_flush = 0;
-    top->pc_in = 0x1000;
+    tick(top, tfp);
 
-    eval_and_step(top, time);
-
-    std::cout << "=== After Instruction Write ===\n";
-    std::cout << "rs1_out        = " << int(top->rs1_out) << "\n";
-    std::cout << "rs2_out        = " << int(top->rs2_out) << "\n";
-    std::cout << "rd_out         = " << int(top->rd_out) << "\n";
-    std::cout << "rs1_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs1_data_out << std::dec << "\n";
-    std::cout << "rs2_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs2_data_out << std::dec << "\n";
-    std::cout << "imm_out        = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->imm_out << std::dec << "\n";
-    std::cout << "alu_ctrl_out   = 0x" << std::hex << int(top->alu_ctrl_out) << std::dec << "\n";
-    std::cout << "branch_ctrl_out= " << int(top->branch_ctrl_out) << "\n";
-    std::cout << "reg_write_out  = " << int(top->reg_write_out) << "\n";
-    std::cout << "mem_read_out   = " << int(top->mem_read_out) << "\n";
-    std::cout << "mem_write_out  = " << int(top->mem_write_out) << "\n";
-    std::cout << "mem_to_reg_out = " << int(top->mem_to_reg_out) << "\n";
-    std::cout << "jal_out        = " << int(top->jal_out) << "\n";
-    std::cout << "jalr_out       = " << int(top->jalr_out) << "\n";
-    std::cout << "branch_out     = " << int(top->branch_out) << "\n";
-    std::cout << "alu_src_out    = " << int(top->alu_src_out) << "\n\n";
-
-    // Flush the pipeline stage
+    // --- Test 2: ADDI x0, x0, 0 (Flush Active) ---
+    top->instr_in = 0x00000013; // ADDI x0, x0, 0
+    top->pc_in = 0x00000004;
     top->id_ex_flush = 1;
-    eval_and_step(top, time);
-
-    std::cout << "=== After Flush ===\n";
-    std::cout << "rs1_out        = " << int(top->rs1_out) << "\n";
-    std::cout << "rs2_out        = " << int(top->rs2_out) << "\n";
-    std::cout << "rd_out         = " << int(top->rd_out) << "\n";
-    std::cout << "rs1_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs1_data_out << std::dec << "\n";
-    std::cout << "rs2_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs2_data_out << std::dec << "\n";
-    std::cout << "imm_out        = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->imm_out << std::dec << "\n";
-    std::cout << "alu_ctrl_out   = 0x" << std::hex << int(top->alu_ctrl_out) << std::dec << "\n";
-    std::cout << "branch_ctrl_out= " << int(top->branch_ctrl_out) << "\n";
-    std::cout << "reg_write_out  = " << int(top->reg_write_out) << "\n";
-    std::cout << "mem_read_out   = " << int(top->mem_read_out) << "\n";
-    std::cout << "mem_write_out  = " << int(top->mem_write_out) << "\n";
-    std::cout << "mem_to_reg_out = " << int(top->mem_to_reg_out) << "\n";
-    std::cout << "jal_out        = " << int(top->jal_out) << "\n";
-    std::cout << "jalr_out       = " << int(top->jalr_out) << "\n";
-    std::cout << "branch_out     = " << int(top->branch_out) << "\n";
-    std::cout << "alu_src_out    = " << int(top->alu_src_out) << "\n\n";
-
-    // Disable writing (simulate pipeline stall or similar)
     top->id_ex_write = 0;
-    top->id_ex_flush = 0;
-    eval_and_step(top, time);
+    tick(top, tfp);
 
-    std::cout << "=== After Write Disabled ===\n";
-    std::cout << "rs1_out        = " << int(top->rs1_out) << "\n";
-    std::cout << "rs2_out        = " << int(top->rs2_out) << "\n";
-    std::cout << "rd_out         = " << int(top->rd_out) << "\n";
-    std::cout << "rs1_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs1_data_out << std::dec << "\n";
-    std::cout << "rs2_data_out   = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->rs2_data_out << std::dec << "\n";
-    std::cout << "imm_out        = 0x" << std::hex << std::setw(8) << std::setfill('0') << top->imm_out << std::dec << "\n";
-    std::cout << "alu_ctrl_out   = 0x" << std::hex << int(top->alu_ctrl_out) << std::dec << "\n";
-    std::cout << "branch_ctrl_out= " << int(top->branch_ctrl_out) << "\n";
-    std::cout << "reg_write_out  = " << int(top->reg_write_out) << "\n";
-    std::cout << "mem_read_out   = " << int(top->mem_read_out) << "\n";
-    std::cout << "mem_write_out  = " << int(top->mem_write_out) << "\n";
-    std::cout << "mem_to_reg_out = " << int(top->mem_to_reg_out) << "\n";
-    std::cout << "jal_out        = " << int(top->jal_out) << "\n";
-    std::cout << "jalr_out       = " << int(top->jalr_out) << "\n";
-    std::cout << "branch_out     = " << int(top->branch_out) << "\n";
-    std::cout << "alu_src_out    = " << int(top->alu_src_out) << "\n";
-
+    tfp->close();
+    delete tfp;
     delete top;
     return 0;
 }

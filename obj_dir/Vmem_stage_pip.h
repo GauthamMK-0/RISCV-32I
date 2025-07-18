@@ -13,6 +13,7 @@
 
 class Vmem_stage_pip__Syms;
 class Vmem_stage_pip___024root;
+class VerilatedVcdC;
 
 // This class is the main interface to the Verilated model
 class alignas(VL_CACHE_LINE_BYTES) Vmem_stage_pip VL_NOT_FINAL : public VerilatedModel {
@@ -24,7 +25,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vmem_stage_pip VL_NOT_FINAL : public Verilate
 
     // CONSTEXPR CAPABILITIES
     // Verilated with --trace?
-    static constexpr bool traceCapable = false;
+    static constexpr bool traceCapable = true;
 
     // PORTS
     // The application code writes and reads these signals to
@@ -33,15 +34,19 @@ class alignas(VL_CACHE_LINE_BYTES) Vmem_stage_pip VL_NOT_FINAL : public Verilate
     VL_IN8(&rst,0,0);
     VL_IN8(&funct3_in,2,0);
     VL_IN8(&rd_in,4,0);
+    VL_IN8(&wb_sel_in,1,0);
     VL_IN8(&mem_read_in,0,0);
     VL_IN8(&mem_write_in,0,0);
     VL_IN8(&reg_write_in,0,0);
     VL_IN8(&mem_to_reg_in,0,0);
     VL_OUT8(&rd_out,4,0);
+    VL_OUT8(&wb_sel_out,1,0);
     VL_OUT8(&reg_write_out,0,0);
     VL_OUT8(&mem_to_reg_out,0,0);
+    VL_IN(&pc_in,31,0);
     VL_IN(&alu_result_in,31,0);
     VL_IN(&rs2_data_in,31,0);
+    VL_OUT(&pc_out,31,0);
     VL_OUT(&alu_result_out,31,0);
     VL_OUT(&mem_data_out,31,0);
 
@@ -95,6 +100,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vmem_stage_pip VL_NOT_FINAL : public Verilate
     /// Re-init after cloning the model at the process level (e.g. fork in Linux)
     /// Re-allocate necessary resources. Called after cloning.
     void atClone() const;
+    std::unique_ptr<VerilatedTraceConfig> traceConfig() const override final;
   private:
     // Internal functions - trace registration
     void traceBaseModel(VerilatedTraceBaseC* tfp, int levels, int options);

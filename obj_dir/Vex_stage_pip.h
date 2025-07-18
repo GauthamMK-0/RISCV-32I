@@ -13,6 +13,7 @@
 
 class Vex_stage_pip__Syms;
 class Vex_stage_pip___024root;
+class VerilatedVcdC;
 
 // This class is the main interface to the Verilated model
 class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip VL_NOT_FINAL : public VerilatedModel {
@@ -24,18 +25,20 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip VL_NOT_FINAL : public Verilated
 
     // CONSTEXPR CAPABILITIES
     // Verilated with --trace?
-    static constexpr bool traceCapable = false;
+    static constexpr bool traceCapable = true;
 
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
+    VL_IN8(&funct3_in,2,0);
     VL_IN8(&rs1_in,4,0);
     VL_IN8(&rs2_in,4,0);
     VL_IN8(&rd_in,4,0);
     VL_IN8(&alu_ctrl_in,3,0);
     VL_IN8(&branch_ctrl_in,2,0);
+    VL_IN8(&wb_sel_in,1,0);
     VL_IN8(&reg_write_in,0,0);
     VL_IN8(&mem_read_in,0,0);
     VL_IN8(&mem_write_in,0,0);
@@ -46,15 +49,18 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip VL_NOT_FINAL : public Verilated
     VL_IN8(&jalr_in,0,0);
     VL_IN8(&forward_rs1,1,0);
     VL_IN8(&forward_rs2,1,0);
+    VL_OUT8(&funct3_out,2,0);
     VL_OUT8(&rd_out,4,0);
     VL_OUT8(&rs1_out,4,0);
     VL_OUT8(&rs2_out,4,0);
+    VL_OUT8(&wb_sel_out,1,0);
     VL_OUT8(&mem_read_out,0,0);
     VL_OUT8(&mem_write_out,0,0);
     VL_OUT8(&reg_write_out,0,0);
     VL_OUT8(&mem_to_reg_out,0,0);
     VL_OUT8(&branch_taken_out,0,0);
     VL_OUT8(&jump_out,0,0);
+    VL_OUT8(&alu_ctrl_debug,3,0);
     VL_IN(&pc_in,31,0);
     VL_IN(&rs1_data_in,31,0);
     VL_IN(&rs2_data_in,31,0);
@@ -66,6 +72,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip VL_NOT_FINAL : public Verilated
     VL_OUT(&rs2_data_out,31,0);
     VL_OUT(&branch_target_out,31,0);
     VL_OUT(&jump_target_out,31,0);
+    VL_OUT(&alu_a_debug,31,0);
+    VL_OUT(&alu_b_debug,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -117,6 +125,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vex_stage_pip VL_NOT_FINAL : public Verilated
     /// Re-init after cloning the model at the process level (e.g. fork in Linux)
     /// Re-allocate necessary resources. Called after cloning.
     void atClone() const;
+    std::unique_ptr<VerilatedTraceConfig> traceConfig() const override final;
   private:
     // Internal functions - trace registration
     void traceBaseModel(VerilatedTraceBaseC* tfp, int levels, int options);

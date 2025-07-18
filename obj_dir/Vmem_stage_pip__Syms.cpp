@@ -43,12 +43,16 @@ Vmem_stage_pip__Syms::Vmem_stage_pip__Syms(VerilatedContext* contextp, const cha
         __Vscope_TOP.varInsert(__Vfinal,"mem_to_reg_in", &(TOP.mem_to_reg_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
         __Vscope_TOP.varInsert(__Vfinal,"mem_to_reg_out", &(TOP.mem_to_reg_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,0);
         __Vscope_TOP.varInsert(__Vfinal,"mem_write_in", &(TOP.mem_write_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
+        __Vscope_TOP.varInsert(__Vfinal,"pc_in", &(TOP.pc_in), false, VLVT_UINT32,VLVD_IN|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_TOP.varInsert(__Vfinal,"pc_out", &(TOP.pc_out), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"rd_in", &(TOP.rd_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_TOP.varInsert(__Vfinal,"rd_out", &(TOP.rd_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_TOP.varInsert(__Vfinal,"reg_write_in", &(TOP.reg_write_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
         __Vscope_TOP.varInsert(__Vfinal,"reg_write_out", &(TOP.reg_write_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,0);
         __Vscope_TOP.varInsert(__Vfinal,"rs2_data_in", &(TOP.rs2_data_in), false, VLVT_UINT32,VLVD_IN|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"rst", &(TOP.rst), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
+        __Vscope_TOP.varInsert(__Vfinal,"wb_sel_in", &(TOP.wb_sel_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_TOP.varInsert(__Vfinal,"wb_sel_out", &(TOP.wb_sel_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"addr_lsb", &(TOP.mem_stage_pip__DOT__addr_lsb), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"alu_result_in", &(TOP.mem_stage_pip__DOT__alu_result_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"alu_result_out", &(TOP.mem_stage_pip__DOT__alu_result_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
@@ -61,6 +65,8 @@ Vmem_stage_pip__Syms::Vmem_stage_pip__Syms(VerilatedContext* contextp, const cha
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"mem_to_reg_in", &(TOP.mem_stage_pip__DOT__mem_to_reg_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"mem_to_reg_out", &(TOP.mem_stage_pip__DOT__mem_to_reg_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"mem_write_in", &(TOP.mem_stage_pip__DOT__mem_write_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_mem_stage_pip.varInsert(__Vfinal,"pc_in", &(TOP.mem_stage_pip__DOT__pc_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_mem_stage_pip.varInsert(__Vfinal,"pc_out", &(TOP.mem_stage_pip__DOT__pc_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"rd_in", &(TOP.mem_stage_pip__DOT__rd_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"rd_out", &(TOP.mem_stage_pip__DOT__rd_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"read_data", &(TOP.mem_stage_pip__DOT__read_data), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
@@ -68,6 +74,8 @@ Vmem_stage_pip__Syms::Vmem_stage_pip__Syms(VerilatedContext* contextp, const cha
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"reg_write_out", &(TOP.mem_stage_pip__DOT__reg_write_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"rs2_data_in", &(TOP.mem_stage_pip__DOT__rs2_data_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_mem_stage_pip.varInsert(__Vfinal,"rst", &(TOP.mem_stage_pip__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_mem_stage_pip.varInsert(__Vfinal,"wb_sel_in", &(TOP.mem_stage_pip__DOT__wb_sel_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_mem_stage_pip.varInsert(__Vfinal,"wb_sel_out", &(TOP.mem_stage_pip__DOT__wb_sel_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_mem_stage_pip__byte_mask.varInsert(__Vfinal,"addr_lsb", &(TOP.mem_stage_pip__DOT__byte_mask__DOT__addr_lsb), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_mem_stage_pip__byte_mask.varInsert(__Vfinal,"byte_enable", &(TOP.mem_stage_pip__DOT__byte_mask__DOT__byte_enable), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_mem_stage_pip__byte_mask.varInsert(__Vfinal,"funct3", &(TOP.mem_stage_pip__DOT__byte_mask__DOT__funct3), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,2,0);
@@ -90,10 +98,14 @@ Vmem_stage_pip__Syms::Vmem_stage_pip__Syms(VerilatedContext* contextp, const cha
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"mem_data_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__mem_data_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"mem_to_reg_in", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"mem_to_reg_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__mem_to_reg_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"pc_in", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__pc_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"pc_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__pc_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"rd_in", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__rd_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"rd_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__rd_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"reg_write_in", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__reg_write_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"reg_write_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__reg_write_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"rst", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"wb_sel_in", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_mem_stage_pip__memwb_register.varInsert(__Vfinal,"wb_sel_out", &(TOP.mem_stage_pip__DOT__memwb_register__DOT__wb_sel_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
     }
 }

@@ -29,28 +29,21 @@ VL_ATTR_COLD void Vpipeline___024root___eval_initial__TOP(Vpipeline___024root* v
     Vpipeline__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0U] = 0x100093U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[1U] = 0x200113U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[2U] = 0x300193U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[3U] = 0x400213U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[4U] = 0x2082b3U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[5U] = 0x40228333U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[6U] = 0x42f3b3U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[7U] = 0x52e433U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[8U] = 0x62c4b3U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[9U] = 0x729433U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xaU] = 0x82d4b3U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xbU] = 0x40a2d533U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xcU] = 0xb2a5b3U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xdU] = 0xc2b633U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xeU] = 0x10a693U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xfU] = 0x10b713U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x10U] = 0x10c793U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x11U] = 0x10d813U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x12U] = 0x10e893U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x13U] = 0x109613U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x14U] = 0x10d693U;
-    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0x15U] = 0x4010d713U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0U] = 0x93U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[1U] = 0x500113U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[2U] = 0xa00193U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[3U] = 0x218333U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[4U] = 0x6282b3U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[5U] = 0x62a2b3U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[6U] = 0x4000efU;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[7U] = 0x13U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[8U] = 0x108093U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[9U] = 0x310063U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xaU] = 0xc00093U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xbU] = 0x500193U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xcU] = 0x319063U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xdU] = 0xd00093U;
+    vlSelfRef.pipeline__DOT__if_stage__DOT__instruction_memory__DOT__memory[0xeU] = 0x100113U;
 }
 
 VL_ATTR_COLD void Vpipeline___024root___eval_final(Vpipeline___024root* vlSelf) {

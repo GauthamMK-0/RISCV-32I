@@ -34,6 +34,9 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
     __Vscope_ex_stage_pip__jmp_unit.configure(this, name(), "ex_stage_pip.jmp_unit", "jmp_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
     // Setup export functions
     for (int __Vfinal = 0; __Vfinal < 2; ++__Vfinal) {
+        __Vscope_TOP.varInsert(__Vfinal,"alu_a_debug", &(TOP.alu_a_debug), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_TOP.varInsert(__Vfinal,"alu_b_debug", &(TOP.alu_b_debug), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_TOP.varInsert(__Vfinal,"alu_ctrl_debug", &(TOP.alu_ctrl_debug), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_TOP.varInsert(__Vfinal,"alu_ctrl_in", &(TOP.alu_ctrl_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_TOP.varInsert(__Vfinal,"alu_result_out", &(TOP.alu_result_out), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"alu_src_in", &(TOP.alu_src_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
@@ -46,6 +49,8 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_TOP.varInsert(__Vfinal,"forward_data_wb", &(TOP.forward_data_wb), false, VLVT_UINT32,VLVD_IN|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"forward_rs1", &(TOP.forward_rs1), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_TOP.varInsert(__Vfinal,"forward_rs2", &(TOP.forward_rs2), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_TOP.varInsert(__Vfinal,"funct3_in", &(TOP.funct3_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,2,0);
+        __Vscope_TOP.varInsert(__Vfinal,"funct3_out", &(TOP.funct3_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,2,0);
         __Vscope_TOP.varInsert(__Vfinal,"imm_in", &(TOP.imm_in), false, VLVT_UINT32,VLVD_IN|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"jal_in", &(TOP.jal_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
         __Vscope_TOP.varInsert(__Vfinal,"jalr_in", &(TOP.jalr_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
@@ -71,8 +76,13 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_TOP.varInsert(__Vfinal,"rs2_in", &(TOP.rs2_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_TOP.varInsert(__Vfinal,"rs2_out", &(TOP.rs2_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_TOP.varInsert(__Vfinal,"rst", &(TOP.rst), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,0);
+        __Vscope_TOP.varInsert(__Vfinal,"wb_sel_in", &(TOP.wb_sel_in), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_TOP.varInsert(__Vfinal,"wb_sel_out", &(TOP.wb_sel_out), false, VLVT_UINT8,VLVD_OUT|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_A", &(TOP.ex_stage_pip__DOT__alu_A), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_B", &(TOP.ex_stage_pip__DOT__alu_B), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_a_debug", &(TOP.ex_stage_pip__DOT__alu_a_debug), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_b_debug", &(TOP.ex_stage_pip__DOT__alu_b_debug), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_ctrl_debug", &(TOP.ex_stage_pip__DOT__alu_ctrl_debug), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_ctrl_in", &(TOP.ex_stage_pip__DOT__alu_ctrl_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_result", &(TOP.ex_stage_pip__DOT__alu_result), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"alu_result_out", &(TOP.ex_stage_pip__DOT__alu_result_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
@@ -88,6 +98,8 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"forward_data_wb", &(TOP.ex_stage_pip__DOT__forward_data_wb), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"forward_rs1", &(TOP.ex_stage_pip__DOT__forward_rs1), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"forward_rs2", &(TOP.ex_stage_pip__DOT__forward_rs2), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"funct3_in", &(TOP.ex_stage_pip__DOT__funct3_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,2,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"funct3_out", &(TOP.ex_stage_pip__DOT__funct3_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,2,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"imm_in", &(TOP.ex_stage_pip__DOT__imm_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"jal_in", &(TOP.ex_stage_pip__DOT__jal_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"jalr_in", &(TOP.ex_stage_pip__DOT__jalr_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
@@ -117,10 +129,14 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"rs2_in", &(TOP.ex_stage_pip__DOT__rs2_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"rs2_out", &(TOP.ex_stage_pip__DOT__rs2_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"rst", &(TOP.ex_stage_pip__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"wb_sel_in", &(TOP.ex_stage_pip__DOT__wb_sel_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_ex_stage_pip.varInsert(__Vfinal,"wb_sel_out", &(TOP.ex_stage_pip__DOT__wb_sel_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_ex_stage_pip.varInsert(__Vfinal,"zero_flag", &(TOP.ex_stage_pip__DOT__zero_flag), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"ADD", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__ADD))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
+        __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"ADD_PC", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__ADD_PC))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"AND", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__AND))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"OR", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__OR))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
+        __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"PASS", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__PASS))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"SLL", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__SLL))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"SLT", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__SLT))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
         __Vscope_ex_stage_pip__alu_unit.varInsert(__Vfinal,"SLTU", const_cast<void*>(static_cast<const void*>(&(TOP.ex_stage_pip__DOT__alu_unit__DOT__SLTU))), true, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,3,0);
@@ -155,6 +171,8 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"branch_target_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__branch_target_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"branch_target_out", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__branch_target_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"clk", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"funct3_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__funct3_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,2,0);
+        __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"funct3_out", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__funct3_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,2,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"jump_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__jump_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"jump_out", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__jump_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"jump_target_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__jump_target_in), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
@@ -178,6 +196,8 @@ Vex_stage_pip__Syms::Vex_stage_pip__Syms(VerilatedContext* contextp, const char*
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"rs2_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__rs2_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"rs2_out", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__rs2_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,4,0);
         __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"rst", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
+        __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"wb_sel_in", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__wb_sel_in), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
+        __Vscope_ex_stage_pip__exmem_register.varInsert(__Vfinal,"wb_sel_out", &(TOP.ex_stage_pip__DOT__exmem_register__DOT__wb_sel_out), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,1 ,1,0);
         __Vscope_ex_stage_pip__jmp_unit.varInsert(__Vfinal,"imm", &(TOP.ex_stage_pip__DOT__jmp_unit__DOT__imm), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,0,1 ,31,0);
         __Vscope_ex_stage_pip__jmp_unit.varInsert(__Vfinal,"jal", &(TOP.ex_stage_pip__DOT__jmp_unit__DOT__jal), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
         __Vscope_ex_stage_pip__jmp_unit.varInsert(__Vfinal,"jalr", &(TOP.ex_stage_pip__DOT__jmp_unit__DOT__jalr), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0,0);
