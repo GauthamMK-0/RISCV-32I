@@ -57,8 +57,9 @@ This repository contains the RTL implementation of a **5-stage pipelined RV32I p
   - Writes the data to destination register in the register file
 
 ## Forwarding and Hazard handling
-  **Forwarding:**
-       The forwarding unit prevents stalls caused by **RAW** (Read after Write) dependencies. This achieved by forwarding data from `rs1` and `rs2` in later pipeline stages to previous stages when required.
+  ### Forwarding
+  
+The forwarding unit prevents stalls caused by **RAW** (Read after Write) dependencies. This achieved by forwarding data from `rs1` and `rs2` in later pipeline stages to previous stages when required.
        
  **Workflow:**
 - **EX** stage forwarding:
@@ -71,10 +72,11 @@ This repository contains the RTL implementation of a **5-stage pipelined RV32I p
     - else if `mem_rd == id_rsX` and `mem_reg_write`, forwards data from **MEM** stage to **ID** stage
     - else if `wb_rd == id_rsX` and `wb_reg_write`, forwards data from **WB** stage to **ID** stage
                
- **Hazard Handling:**
-        Hazard unit handles load-use hazards and control hazards by stalling and flushing the pipeline
-        **Load-use hazard:** Occurs when data is needed brfore data is loaded by load instruction in **MEM** stage
-        **Control hazard:** Occurs when a branch or jump instruction is in the pipeline, and the next instruction is fetched before the outcome or target address of the branch/jump is finalized.
+ ### Hazard Handling:
+ 
+ Hazard unit handles load-use hazards and control hazards by stalling and flushing the pipeline
+**Load-use hazard:** Occurs when data is needed brfore data is loaded by load instruction in **MEM** stage
+**Control hazard:** Occurs when a branch or jump instruction is in the pipeline, and the next instruction is fetched before the outcome or target address of the branch/jump is finalized.
 
  **Workflow:**
 - if `ex_mem_read && (id_rs1 == ex_rd || id_rs2 == ex_rd) && ex_rd!= 5'b0`, load hazard is detected
