@@ -76,6 +76,7 @@ The forwarding unit prevents stalls caused by **RAW** (Read after Write) depende
  
  Hazard unit handles load-use hazards and control hazards by stalling and flushing the pipeline
 **Load-use hazard:** Occurs when data is needed brfore data is loaded by load instruction in **MEM** stage
+
 **Control hazard:** Occurs when a branch or jump instruction is in the pipeline, and the next instruction is fetched before the outcome or target address of the branch/jump is finalized.
 
  **Workflow:**
