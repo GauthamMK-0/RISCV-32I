@@ -1,7 +1,10 @@
+// Description: Byte masking for store instructions
+// Supports store-byte, store-half-word and store-word
+
 module byte_logic (
-input wire [2:0] funct3,
-input wire [1:0] addr_lsb,
-output reg [3:0] byte_enable
+      input wire [2:0] funct3, 
+      input wire [1:0] addr_lsb,    // 2-bit lsb of address
+      output reg [3:0] byte_enable 
 
 );
 

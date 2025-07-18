@@ -1,3 +1,5 @@
+// Description: ID-stage pipeline initialization
+
 module id_stage_pip (
     input wire clk,
     input wire rst,
@@ -15,9 +17,11 @@ module id_stage_pip (
     input wire ex_reg_write,
     input wire mem_reg_write,
 
+    // from forwarding unit
     input wire [1:0] forward_rs1,
     input wire [1:0] forward_rs2,
 
+    // to hazard unit
     output wire [4:0] rs1_hzd,
     output wire [4:0] rs2_hzd,
     output wire [4:0] rd_hzd,

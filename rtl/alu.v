@@ -1,3 +1,6 @@
+// Description: ALU module for RISCV-32I core
+// Supports all RV32I instructions 
+
 module alu (
     input wire [31:0] op_A,
     input wire [31:0] op_B,
@@ -16,8 +19,8 @@ localparam SRL = 4'b0110;
 localparam SRA = 4'b0111;
 localparam SLT = 4'b1000;
 localparam SLTU = 4'b1001;
-localparam PASS = 4'b1010;
-localparam ADD_PC = 4'b1011; // Add pc for AUIPC instruction
+localparam PASS = 4'b1010;   // PASS for LUI instruction
+localparam ADD_PC = 4'b1011; // ADD_PC for AUIPC instruction
 
 always @(*) begin
     case (alu_ctrl)
@@ -29,14 +32,14 @@ always @(*) begin
         SLL: alu_result = op_A << op_B[4:0]; 
         SRL: alu_result = op_A >> op_B[4:0];  
         SRA: alu_result = $signed(op_A) >>> op_B[4:0];    
-        SLT: alu_result = ($signed(op_A) < $signed(op_B)) ? 32'b1 : 32'b0;  
-        SLTU: alu_result = (op_A < op_B) ? 32'b1 : 32'b0; 
-        PASS: alu_result = op_B;
+        SLT: alu_result = ($signed(op_A) < $signed(op_B)) ? 32'b1 : 32'b0;   // signed
+        SLTU: alu_result = (op_A < op_B) ? 32'b1 : 32'b0;  // unsigned
+        PASS: alu_result = op_B;          // forward op_B for LUI instruction
         ADD_PC: alu_result = op_A + op_B; // For AUIPC, add immediate to PC
         default: alu_result = 32'b0;                        
     endcase
 end
 
-assign zero_flag = (alu_result == 32'b0) ? 1'b1 : 1'b0;
+    assign zero_flag = (alu_result == 32'b0) ? 1'b1 : 1'b0;  // zero flag for BEQ and BNE
     
 endmodule

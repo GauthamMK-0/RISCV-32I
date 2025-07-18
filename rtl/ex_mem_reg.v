@@ -1,3 +1,5 @@
+// Description: EX/MEM pipeline register
+
 module ex_mem_reg (
     input wire clk,
     input wire rst,

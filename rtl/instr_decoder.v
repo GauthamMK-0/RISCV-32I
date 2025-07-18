@@ -1,4 +1,7 @@
-    module instr_decoder (
+// Description: Instruction decoder
+// Decodes necessary fields and generates immediate for all suported instructions
+
+module instr_decoder (
         input wire [31:0] instr,
         output reg [6:0] opcode,
         output reg [4:0] rd,
